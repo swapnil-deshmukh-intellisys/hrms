@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../services/employee.service';
 import { Observable } from 'rxjs';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-employee',
@@ -82,7 +83,7 @@ export class EmployeeComponent implements OnInit {
     this.isSubmitting = true;
     const formData = this.prepareFormData();
 
-    this.http.post('http://localhost:5000/api/employees/add', this.employeeForm.value)
+    this.http.post(`${API_CONFIG.baseUrl}/employees/add`, this.employeeForm.value)
       .subscribe({
         next: () => {
           alert('✅ Employee created:');

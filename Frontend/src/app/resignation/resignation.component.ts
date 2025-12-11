@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-resignation',
@@ -30,7 +31,7 @@ export class ResignationComponent {
 
   submitResignation() {
     if (this.resignationForm.valid) {
-      this.http.post('http://localhost:5000/api/resignation/submit', this.resignationForm.value)
+      this.http.post(`${API_CONFIG.baseUrl}/resignation/submit`, this.resignationForm.value)
         .subscribe({
           next: () => {
             alert('Resignation submitted successfully.');

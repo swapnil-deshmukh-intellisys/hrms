@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClient } from '@angular/common/http';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-payslip-download',
@@ -36,7 +37,7 @@ export class UserPayslipComponentComponent {
       return;
     }
 
-    const url = `http://localhost:5000/api/payslips/download?empId=${this.empId}&month=${selectedMonth}`;
+    const url = `${API_CONFIG.baseUrl}/payslips/download?empId=${this.empId}&month=${selectedMonth}`;
 
     this.http.get(url, { responseType: 'blob' }).subscribe({
       next: (blob) => {

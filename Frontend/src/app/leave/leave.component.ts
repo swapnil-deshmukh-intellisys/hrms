@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { API_CONFIG } from '../config/api.config';
 
 /** Custom validator to check if the date is in the future */
 export const futureDateValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -82,7 +83,7 @@ export class LeaveComponent implements OnInit {
     status: 'Pending'
   };
 
-  this.http.post('http://localhost:5000/api/leave/submit', formData).subscribe({
+  this.http.post(`${API_CONFIG.baseUrl}/leave/submit`, formData).subscribe({
     next: () => {
       alert('Leave submitted successfully!');
       this.leaveForm.reset();

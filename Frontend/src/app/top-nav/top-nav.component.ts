@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-top-nav',
@@ -25,7 +26,7 @@ export class TopNavComponent implements OnInit {
   showNotifications = false;
   notifications: any[] = [];
   unreadNotificationsCount = 0;
-  private readonly API_URL = 'http://localhost:5000/api';
+  private readonly API_URL = API_CONFIG.baseUrl;
 
   constructor(
     private http: HttpClient,

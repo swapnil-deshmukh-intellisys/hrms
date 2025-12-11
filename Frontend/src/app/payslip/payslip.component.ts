@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { EmployeeService } from '../services/employee.service';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-payslip',
@@ -93,7 +94,7 @@ export class PayslipComponent implements OnInit {
     formData.append('month', month);
     formData.append('payslip', file);
 
-    this.http.post('http://localhost:5000/api/payslips/upload', formData).subscribe({
+    this.http.post(`${API_CONFIG.baseUrl}/payslips/upload`, formData).subscribe({
       next: () => {
         alert('Payslip uploaded successfully');
         this.selectedMonths[empId] = undefined;

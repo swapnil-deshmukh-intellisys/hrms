@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_CONFIG } from '../config/api.config';
 
 // Define the Leave interface if not already defined or import it from the correct location
 export interface Leave {
@@ -22,36 +23,36 @@ export class LeaveService {
   constructor(private http: HttpClient) {}
 
   getAllLeaves(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:5000/api/leave/all');
+    return this.http.get<any[]>(`${API_CONFIG.baseUrl}/leave/all`);
   }
 
   submitLeave(leaveData: any): Observable<any> {
-    return this.http.post('http://localhost:5000/api/leave/submit', leaveData);
+    return this.http.post(`${API_CONFIG.baseUrl}/leave/submit`, leaveData);
   }
 
   getHolidays(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:5000/api/holidays');
+    return this.http.get<any[]>(`${API_CONFIG.baseUrl}/holidays`);
   }
 
   approveLeave(id: string): Observable<any> {
-    return this.http.patch(`http://localhost:5000/api/leave/approve/${id}`, {});
+    return this.http.patch(`${API_CONFIG.baseUrl}/leave/approve/${id}`, {});
   }
 
   rejectLeave(id: string, rejectedBy: string, reason: string) {
-  return this.http.patch(`http://localhost:5000/api/leave/reject/${id}`, {
+  return this.http.patch(`${API_CONFIG.baseUrl}/leave/reject/${id}`, {
     rejectedBy,
     rejectionReason: reason
   });
 }
 getRejectedLeaves() {
-  return this.http.get<Leave[]>(`http://localhost:5000/api/leave/rejected`);
+  return this.http.get<Leave[]>(`${API_CONFIG.baseUrl}/leave/rejected`);
 }
 
   getDashboardStats(): Observable<any> {
-    return this.http.get<any>('http://localhost:5000/api/admin/stats');
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/admin/stats`);
   }
 
   getDashboardCharts(): Observable<any> {
-    return this.http.get<any>('http://localhost:5000/api/admin/chart-data');
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/admin/chart-data`);
   }
 }

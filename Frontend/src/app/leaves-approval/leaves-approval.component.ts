@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { API_CONFIG } from '../config/api.config';
 
 interface LeaveRequest {
   _id?: string;
@@ -71,7 +72,7 @@ export class LeavesApprovalComponent {
   }
 
   fetchLeaveRequests(): void {
-    this.http.get<any[]>('http://localhost:5000/api/leave/pending')
+    this.http.get<any[]>(`${API_CONFIG.baseUrl}/leave/pending`)
       .subscribe(data => {
         this.leaveRequests = data.map(req => ({
           _id: req._id,
@@ -94,14 +95,14 @@ export class LeavesApprovalComponent {
   }
 
   fetchApprovedLeaves(): void {
-    this.http.get<ApprovedLeave[]>('http://localhost:5000/api/leave/approved')
+    this.http.get<ApprovedLeave[]>(`${API_CONFIG.baseUrl}/leave/approved`)
       .subscribe(data => {
         this.approvedLeaves = data;
       });
   }
 
   fetchRejectedLeaves(): void {
-    this.http.get<RejectedLeave[]>('http://localhost:5000/api/leave/rejected')
+    this.http.get<RejectedLeave[]>(`${API_CONFIG.baseUrl}/leave/rejected`)
       .subscribe(data => {
         this.rejectedLeaves = data;
       });
@@ -114,7 +115,7 @@ export class LeavesApprovalComponent {
   approveLeave(index: number): void {
     const request = this.leaveRequests[index];
 
-    this.http.patch(`http://localhost:5000/api/leave/approve/${request._id}`, {
+    this.http.patch(`${API_CONFIG.baseUrl}/leave/approve/${request._id}`, {
       approvedBy: request.approvedBy
     }).subscribe(() => {
       const approvedLeave: ApprovedLeave = {
@@ -139,7 +140,7 @@ export class LeavesApprovalComponent {
     const rejectionReason = request.remarks || 'Rejected by manager';
     const rejectedBy = request.approvedBy || 'Admin';
 
-    this.http.patch(`http://localhost:5000/api/leave/reject/${request._id}`, {
+    this.http.patch(`${API_CONFIG.baseUrl}/leave/reject/${request._id}`, {
       rejectedBy,
       rejectionReason
     }).subscribe(() => {

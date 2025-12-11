@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router'; // ⬅️ Import Router
 import { RouterModule } from '@angular/router';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-reset-password',
@@ -58,7 +59,7 @@ export class ResetPasswordComponent {
       confirmPassword: this.confirmPassword.value
     };
 
-    this.http.post<any>('http://localhost:5000/api/reset-password', payload).subscribe({
+    this.http.post<any>(`${API_CONFIG.baseUrl}/reset-password`, payload).subscribe({
       next: (res) => {
         this.successMessage = res.message;
         this.resetPasswordForm.reset();

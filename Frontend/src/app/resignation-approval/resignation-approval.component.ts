@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-resignation-approval',
@@ -25,7 +26,7 @@ export class ResignationApprovalComponent implements OnInit {
   }
 
   fetchPendingResignations(): void {
-    this.http.get<any[]>('http://localhost:5000/api/resignation/pending')
+    this.http.get<any[]>(`${API_CONFIG.baseUrl}/resignation/pending`)
       .subscribe({
         next: (data) => {
           this.resignationRequests = data.map(r => ({
@@ -55,7 +56,7 @@ export class ResignationApprovalComponent implements OnInit {
       status: 'Approved'
     };
 
-    this.http.put('http://localhost:5000/api/resignation/approve', {
+    this.http.put(`${API_CONFIG.baseUrl}/resignation/approve`, {
       empCode: request.empCode
     }).subscribe({
       next: () => {
@@ -78,7 +79,7 @@ export class ResignationApprovalComponent implements OnInit {
       rejectionReason: 'Manager rejected'
     };
 
-    this.http.put('http://localhost:5000/api/resignation/reject', {
+    this.http.put(`${API_CONFIG.baseUrl}/resignation/reject`, {
       empCode: request.empCode
     }).subscribe({
       next: () => {

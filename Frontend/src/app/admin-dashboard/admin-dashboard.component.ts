@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChartConfiguration } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -135,7 +136,7 @@ export class AdminDashboardComponent implements OnInit {
     { name: 'Akshay Kumar', dept: 'Sales', title: 'Sales Representative', status: 'Active' }
   ];
 
-  private readonly API_URL = 'http://localhost:5000/api/employees';
+  private readonly API_URL = `${API_CONFIG.baseUrl}/employees`;
   private readonly STORAGE_KEY = 'admin_dashboard_data';
 
   constructor(
@@ -221,7 +222,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   private loadDashboardData(): void {
-    this.http.get<any>('http://localhost:5000/api/admin-dashboard/public').subscribe({
+    this.http.get<any>(`${API_CONFIG.baseUrl}/admin-dashboard/public`).subscribe({
       next: (data) => {
         this.welcomeMessage = data?.welcomeMessage || '';
         this.newsItems = data?.newsItems || [];
@@ -248,7 +249,7 @@ export class AdminDashboardComponent implements OnInit {
       reminders: this.reminders
     };
 
-    this.http.put<any>('http://localhost:5000/api/admin-dashboard', data).subscribe({
+    this.http.put<any>(`${API_CONFIG.baseUrl}/admin-dashboard`, data).subscribe({
       next: () => console.log('Dashboard data saved'),
       error: (err) => console.error('Error saving dashboard:', err)
     });
@@ -331,7 +332,7 @@ export class AdminDashboardComponent implements OnInit {
         this.imageUrl = emp.image?.startsWith('http')
           ? emp.image
           : emp.image
-            ? `${this.API_URL}/${emp.image}`
+            ? `https://hrms-backend-x5bb.onrender.com/${emp.image}`
             : 'assets/employee (1).png';
       },
       error: (err) => console.error('Error fetching employee details:', err),

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, catchError, throwError } from 'rxjs';
+import { API_CONFIG } from '../config/api.config';
 
 interface AuthResponse {
   success: boolean;
@@ -14,7 +15,7 @@ interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000/api/auth'; // ✅ Your backend URL
+  private apiUrl = `${API_CONFIG.baseUrl}/auth`;
 
   constructor(private http: HttpClient) {}
 

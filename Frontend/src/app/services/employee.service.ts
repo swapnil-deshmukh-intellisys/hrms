@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { API_CONFIG } from '../config/api.config';
 
 export interface Employee {
   _id?: string;
@@ -43,7 +44,7 @@ export class EmployeeService {
   private employeeProfile = new BehaviorSubject<Employee | null>(null);
   employeeProfile$ = this.employeeProfile.asObservable();
 
-  private baseUrl = 'http://localhost:5000/api/employees'; // 🔗 Make sure this matches your backend route
+  private baseUrl = `${API_CONFIG.baseUrl}/employees`;
 
   constructor(
     private http: HttpClient,
@@ -136,7 +137,7 @@ getEmployeeById(employeeId: string): Observable<any> {
 }
 
 getEmployeeByCode(employeeCode: string): Observable<any> {
-  return this.http.get<any>(`http://localhost:5000/api/employees/employee/code/${employeeCode}`);
+  return this.http.get<any>(`${API_CONFIG.baseUrl}/employees/employee/code/${employeeCode}`);
 }
 
 
