@@ -1,0 +1,32 @@
+<div class="navbar">
+  <h2>Intellisys IT Solutions Private Limited</h2>
+</div>
+
+
+
+
+<div class="resignation-wrapper">
+  <h2>Resignation Form</h2>
+
+  <form class="resignation-form" [formGroup]="resignationForm" (ngSubmit)="submitResignation()">
+    <label>Employee Code</label>
+    <input formControlName="employeeCode" type="text" placeholder="Enter Employee Code">
+
+    <label>Employee Name</label>
+    <input formControlName="employeeName" type="text" placeholder="Enter Name">
+
+    <label>Department</label>
+    <input formControlName="department" type="text" placeholder="Enter Department">
+
+    <label>Last Working Day</label>
+    <input formControlName="lastWorkingDate" type="date">
+
+    <label>Reason for Exit</label>
+    <textarea formControlName="reason" placeholder="Enter reason" rows="4"></textarea>
+
+    <div class="button-group">
+      <button type="submit" class="submit-btn">Submit</button>
+      <button type="button" class="cancel-btn">Cancel</button>
+    </div>
+  </form>
+</div>

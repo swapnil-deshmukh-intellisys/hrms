@@ -1,0 +1,491 @@
+/* Base Styles */
+* {
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Main Container */
+.company-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background-color: #000000; /* Orange background */
+  height: 60px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Company Name */
+.company-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 auto; /* Center the company name */
+}
+
+/* Right Content */
+.right-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: transparent;
+}
+
+.employee-details {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.employee-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.employee-info span {
+  font-size: 13px;
+  color: #f5f5f5;
+}
+
+.employee-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+}
+
+.notification-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.logout-btn {
+  background-color: #d35400; /* Darker orange */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logout-btn:hover {
+  background-color: #a04000;
+}
+
+/* Welcome Section */
+.welcome-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 25px;
+  margin: 20px 0;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-radius: 10px;
+}
+
+.employee-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.employee-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f1f1f1;
+}
+
+.welcome-text h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.welcome-message p {
+  font-size: 16px;
+  color: #7f8c8d;
+  margin-top: -5px;
+  margin-left: 13%;
+}
+
+.officelogo img {
+  width: 250px;
+  height: auto;
+}
+
+/* Content Section */
+.content-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin: 0 5px;
+}
+
+/* Common Card Styles */
+.content-box, 
+.content-feed, 
+.content-doc, 
+.content-joinee,
+.content-remind,
+.content1-box {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: -25px -25px 25px;
+  padding: 15px 25px;
+  background: #e67e22; /* Orange header */
+  border-radius: 10px 10px 0 0;
+  color: white;
+}
+
+.section-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Current Time Box */
+.content1-box {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  color: white;
+  text-align: center;
+}
+
+.content1-box h4 {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.content1-box p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+/* News Center */
+.content-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.content-box ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+/* Reminders Section */
+.content-remind {
+  background-color: #ffffff;
+}
+
+.reminder-row {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.reminder-row:hover {
+  background-color: #ecf0f1;
+}
+
+.reminder-details h5 {
+  margin: 0 0 5px 0;
+  color: #2c3e50;
+}
+
+.reminder-details p {
+  margin: 3px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Documents Section */
+.document-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+/* Todo List */
+.todo-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #95a5a6;
+}
+
+/* New Joinee Section */
+.joinee-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.joinee-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 2px solid #ecf0f1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .welcome-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .employee-info {
+    flex-direction: column;
+  }
+
+  
+  .company-name {
+    display: none;
+  }
+  
+  .right-content {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .company-bar
+  {
+    display: none;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  .content-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .employee-img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .welcome-text h1 {
+    font-size: 20px;
+  }
+  
+  .officelogo img {
+    width: 200px;
+  }
+  .main-content
+  {
+    margin-top: 20%;
+  }
+  .employee-info h1
+  {
+    font-size: 27px;
+  }
+  .welcome-message p 
+  {
+    font-size: 15px;
+
+  margin-left: 0%;
+  }
+  
+}
+
+/* Add orange background to all section headings */
+.content-box h4,
+.content-feed h4,
+.content-doc h4,
+.content-joinee h4,
+.content-remind h4,
+.content1-box h4 {
+  background-color: #e67e22; /* Orange color */
+  color: white;
+  padding: 10px 15px;
+  margin: -25px -25px 20px -25px; /* Align with card padding */
+  border-radius: 8px 8px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Specific adjustment for time/date box */
+.content1-box h4 {
+  background-color: rgba(0,0,0,0.2); /* Slightly darker overlay */
+  margin-bottom: 25px;
+}
+
+/* Make sure content doesn't get hidden behind headings */
+.content-box,
+.content-feed, 
+.content-doc,
+.content-joinee,
+.content-remind {
+  position: relative;
+  overflow: hidden;
+  padding-top: 15px; /* Extra space for heading */
+}
+
+/* Notification Styles */
+.notification-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.notification-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.notification-icon:hover {
+  transform: scale(1.1);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ff4757;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.notification-popup {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 350px;
+  max-height: 500px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  transform-origin: top right;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #faf9f8;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.notification-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.notification-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+}
+
+.notification-item:hover {
+  background: #f8f9fa;
+}
+
+.notification-item.unread {
+  background: #f0f7ff;
+}
+
+.notification-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-content strong {
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: #222;
+}
+
+.notification-content p {
+  margin: 0 0 4px 0;
+  font-size: 13px;
+  color: #555555;
+  line-height: 1.4;
+}
+
+.notification-content small {
+  color: #999;
+  font-size: 11px;
+}
+
+.empty-notifications {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+}
+
+/* Make sure navbar has proper z-index */
+.company-bar {
+  position: relative;
+  z-index: 100;
+}

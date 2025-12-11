@@ -1,0 +1,114 @@
+<!-- Left Panel -->
+<div class="navbar">
+    <div class="logo">Intellisys IT Solution Pvt Ltd</div>
+  </div>
+
+<div class="heading">
+  <h4>Time And Attendance</h4>
+</div>
+
+<div class="commondiv">
+
+  <!-- Left Panel -->
+  <div class="divleft">
+    <div class="dashboard-container">
+      <div class="left-panel">
+        <div class="checkbox-container">
+          <label>
+            <input type="checkbox" [(ngModel)]="isChecked">
+          </label>
+        </div>
+        <div class="header">
+          <h3>Current Date And Time</h3>
+          <div class="time-display">
+            <p>{{ currentDate }}</p>
+            <p>{{ currentTime }}</p>
+          </div>
+          <div class="buttons">
+            <button (click)="onMarkInTime()">Mark In Time</button> 
+            <button (click)="onMarkOutTime()">Mark Out Time</button>
+          </div>
+          <div class="marked-times">
+            <p><strong>Marked In Time:</strong> {{ markInTime }}</p>
+            <p><strong>Marked Out Time:</strong> {{ markOutTime }}</p>
+            <p><strong>Total Hours:</strong> {{ durationTime }}</p>
+
+          </div>
+        </div>
+
+       
+      </div>
+    </div>
+  </div>
+
+  <!-- Center Panel (Calendar) -->
+  <div class="divcenter">
+    <!-- FullCalendar -->
+    <div class="calendar-container">
+      <div class="calendar-box">
+        <div style="text-align: center;">
+         
+        </div>
+
+        <full-calendar [options]="calendarOptions"></full-calendar>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Panel -->
+  <div class="divright">
+    <div class="right-panel">
+      <div class="attendance-summary">
+        <h3>Absence In Current Month</h3>
+
+        <!-- Attendance Summary Container -->
+        <div class="attendance-container">
+          <!-- Present & Absent -->
+          <div class="attendance-row">
+            <div class="attendance-box present">
+              <div class="attendance-details">
+                <p class="status-count"> Present {{ attendanceSummary.present }}</p>
+              </div>
+            </div>
+            <div class="attendance-box absent">
+              <div class="attendance-details">
+                <p class="status-count">Absent {{ attendanceSummary.absent }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leave & LWP -->
+          <div class="attendance-row">
+            <div class="attendance-box leave">
+              <div class="attendance-details">
+                <p class="status-count">Attendance (Submit) {{ attendanceSummary.attendanceSubmit }}</p>
+              </div>
+            </div>
+            <div class="attendance-box lwp">
+              <div class="attendance-details">
+                <p class="status-count">Half Day {{ attendanceSummary.halfDay }}</p>
+              </div>
+            </div>
+          </div>
+
+          
+           
+          </div>
+
+         
+        </div>
+      </div>
+
+      <!-- Upcoming Holidays Section -->
+      <div class="upcoming-holidays">
+        <h4>
+          Upcoming Holidays
+          <a routerLink="/holiday" class="view-holidays-link"> View Holidays</a>
+        </h4>
+      
+        
+      </div>
+      
+    </div>
+  </div>
+

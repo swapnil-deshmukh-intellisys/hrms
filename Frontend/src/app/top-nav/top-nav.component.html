@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="top-nav">
+  <!-- Hamburger Button -->
+  <button class="hamburger-btn" (click)="toggleMenu()">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <!-- HRMThread Title -->
+  <h4>HRMTHREAD</h4>
+
+  <!-- User Info Section -->
+  <div class="main">
+    <div class="user-info">
+      <span class="user-name">Mr....</span>
+      <span class="user-id">NQE00392</span>
+    </div>
+    <div class="profile-img">
+      <img src="assets/employee (1).png" alt="Employee Image" class="employee-image">
+    </div>
+    <div class="user-info1">
+      <div class="notification-container">
+        <i class="fa fa-bell" (click)="toggleNotifications()"></i>
+        <span *ngIf="unreadNotificationsCount > 0" class="notification-badge">
+          {{ unreadNotificationsCount }}
+        </span>
+        
+        <!-- Notification popup -->
+        <div *ngIf="showNotifications" class="notification-popup">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="close-btn" (click)="showNotifications = false">&times;</button>
+          </div>
+          <div class="notification-list">
+            <div *ngFor="let notification of notifications" 
+                 class="notification-item" 
+                 [class.unread]="!notification.isRead">
+              <div class="notification-content">
+                <strong>{{ notification.title }}</strong>
+                <p>{{ notification.message }}</p>
+                <small>{{ notification.createdAt | date:'shortTime' }} • {{ notification.createdAt | date:'mediumDate' }}</small>
+              </div>
+            </div>
+            <div *ngIf="notifications.length === 0" class="empty-notifications">
+              No new notifications
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Sidebar Menu -->
+<div id="menuList" *ngIf="isMenuOpen">
+
+  <!-- ✅ USER MENU -->
+  <ul *ngIf="role === 'user' || role === 'employee'">
+
+    <li>
+      <a (click)="toggleDropdown('home')">
+        <span>🏠</span> Home
+        <span class="arrow" [ngClass]="{ open: isDropdownOpen.home }">&#9662;</span>
+      </a>
+      <ul *ngIf="isDropdownOpen.home" class="dropdown">
+        <li><a [routerLink]="['/right']"  (click)="navigateAndClose()">Home</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a (click)="toggleDropdown('profile')">
+        <span>👤</span> Profile
+        <span class="arrow" [ngClass]="{ open: isDropdownOpen.profile }">&#9662;</span>
+      </a>
+      <ul *ngIf="isDropdownOpen.profile" class="dropdown">
+        <li><a [routerLink]="['/profile']"  (click)="navigateAndClose()">View Profile</a></li>
+      </ul>
+    </li>
+
+    <li><a [routerLink]="['/shedule']"  (click)="navigateAndClose()"><span>🗓️</span> Time & Attendance</a></li>
+    <li><a [routerLink]="['/leave']"  (click)="navigateAndClose()"><span>✅</span> Leave</a></li>
+    <li><a [routerLink]="['/userpay']"  (click)="navigateAndClose()"><span>💰</span> Payslip</a></li>
+    <li><a [routerLink]="['/resignation']"  (click)="navigateAndClose()"><span>🚪</span> Apply Exit</a></li>
+     <li><a [routerLink]="['/login']"  (click)="navigateAndClose()"><span>📊</span> Logout</a></li>
+  </ul>
+
+  <!-- ✅ ADMIN MENU -->
+  <ul *ngIf="role === 'admin'">
+    <li><a [routerLink]="['/admin-dashboard']"  (click)="navigateAndClose()"><span>🕵️‍♂️</span> Admin Dashboard</a></li>
+    <li><a [routerLink]="['/employee-profile']"  (click)="navigateAndClose()"><span>👤</span> Employee</a></li>
+    <li><a [routerLink]="['/leaves-approval']"  (click)="navigateAndClose()"><span>✅</span> Leave Approval</a></li>
+    <li><a [routerLink]="['/attendance-approval']"  (click)="navigateAndClose()"><span>📊</span> Attendance Approval</a></li>
+    <li><a [routerLink]="['/resignation-approval']"  (click)="navigateAndClose()"><span>🚪</span> Resignation Approval</a></li>
+    <li><a [routerLink]="['/admin-profile']"  (click)="navigateAndClose()"><span>👤</span> Admin Profile</a></li>
+    <li><a [routerLink]="['/login']"  (click)="navigateAndClose()"><span>📊</span> Logout</a></li>
+  </ul>
+</div>
