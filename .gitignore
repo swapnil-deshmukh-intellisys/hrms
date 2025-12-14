@@ -1,0 +1,6 @@
+# Commit planning files (helper scripts - should not be in repo)
+commit-plan.md
+create-commits.ps1
+interactive-commits.ps1
+README-COMMITS.md
+QUICK-COMMIT-GUIDE.md
