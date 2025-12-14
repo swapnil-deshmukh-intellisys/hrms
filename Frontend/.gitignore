@@ -2,3 +2,27 @@ node_modules/
 dist/
 .env/
 .angular/
+
+# Build outputs
+*.tsbuildinfo
+.angular/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+
+# Temporary
+*.tmp
+*.temp
+.cache/
