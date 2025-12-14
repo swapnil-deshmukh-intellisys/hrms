@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { EmployeeService } from '../services/employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -22,7 +23,8 @@ export class EditProfileComponent implements OnInit {
     private employeeService: EmployeeService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +34,7 @@ export class EditProfileComponent implements OnInit {
     if (this.employeeCode) {
       this.fetchEmployee(this.employeeCode);
     } else {
-      alert("❌ No employee code found in route.");
+      this.alertService.error("No employee code found in route.");
       this.isLoading = false;
     }
   }
@@ -53,7 +55,7 @@ export class EditProfileComponent implements OnInit {
       },
       error: (err) => {
         console.error("❌ Error fetching employee:", err);
-        alert("Failed to load employee data.");
+        this.alertService.error("Failed to load employee data.");
         this.isLoading = false;
       }
     });
@@ -63,19 +65,19 @@ export class EditProfileComponent implements OnInit {
     if (form.valid) {
       this.employeeService.updateEmployee(this.profileData._id, this.profileData).subscribe({
         next: () => {
-          alert('✅ Profile updated successfully!');
+          this.alertService.success('Profile updated successfully!');
           this.router.navigate(['/employee-profile']);
         },
         error: (err) => {
           console.error("❌ Error updating employee:", err);
-          alert('❌ Error while updating profile.');
+          this.alertService.error('Error while updating profile.');
         }
       });
     }
   }
 
   canceledit(form: NgForm) {
-    form.resetForm();
+    this.router.navigate(['/employee-profile']);
   }
 
   private formatDate(date: any): string | null {

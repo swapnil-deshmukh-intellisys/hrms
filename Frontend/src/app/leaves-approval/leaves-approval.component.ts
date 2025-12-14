@@ -3,6 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { API_CONFIG } from '../config/api.config';
+import { MatIconModule } from '@angular/material/icon';
 
 interface LeaveRequest {
   _id?: string;
@@ -52,7 +53,7 @@ interface RejectedLeave {
 @Component({
   selector: 'app-leaves-approval',
   standalone: true,
-  imports: [CommonModule, DatePipe, FormsModule],
+  imports: [CommonModule, DatePipe, FormsModule, MatIconModule],
   templateUrl: './leaves-approval.component.html',
   styleUrls: ['./leaves-approval.component.css']
 })

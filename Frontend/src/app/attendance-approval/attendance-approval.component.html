@@ -25,8 +25,8 @@
       <p><strong>CC To:</strong> {{ request.ccTo || '-' }}</p>
 
       <div class="action-buttons">
-        <button class="accept-btn" (click)="accept(i)">✅ Accept</button>
-        <button class="reject-btn" (click)="reject(i)">❌ Reject</button>
+        <button class="accept-btn" (click)="accept(i)"><mat-icon>check_circle</mat-icon> Accept</button>
+        <button class="reject-btn" (click)="reject(i)"><mat-icon>cancel</mat-icon> Reject</button>
       </div>
     </div>
   </div>
@@ -36,9 +36,9 @@
   <h2 class="heading">Holiday Calendar</h2>
 
   <div class="calendar-controls">
-    <button (click)="prevMonth()">❮ Previous</button>
+    <button (click)="prevMonth()"><mat-icon>chevron_left</mat-icon> Previous</button>
     <h3>{{ currentMonth }} {{ currentYear }}</h3>
-    <button (click)="nextMonth()">Next ❯</button>
+    <button (click)="nextMonth()">Next <mat-icon>chevron_right</mat-icon></button>
   </div>
 
   <div class="calendar-grid">

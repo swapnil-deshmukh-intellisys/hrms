@@ -3,17 +3,20 @@
 </div>
 
 <div class="employee-container">
-  <div class="employee-image">
-    <img [src]="profileData.imageUrl || 'assets/employee (1).png'" alt="Employee Image" />
-  </div>
-
   <div class="employee-header">
     <form #editForm="ngForm" (ngSubmit)="submitprofile(editForm)">
+      
+      <!-- Profile Header Section -->
+      <div class="profile-header-section">
+        <div class="employee-image">
+          <img [src]="profileData.imageUrl || 'assets/employee (1).png'" alt="Employee Image" />
+        </div>
 
-      <!-- Employee Name -->
-      <div class="headline">
-        <input type="text" name="name" [(ngModel)]="profileData.name" placeholder="Enter name" required #nameRef="ngModel" />
-        <div *ngIf="nameRef.invalid && nameRef.touched" class="error">Name is required.</div>
+        <!-- Employee Name -->
+        <div class="headline">
+          <input type="text" name="name" [(ngModel)]="profileData.name" placeholder="Enter name" required #nameRef="ngModel" />
+          <div *ngIf="nameRef.invalid && nameRef.touched" class="error">Name is required.</div>
+        </div>
       </div>
 
       <div class="flex-row">
@@ -167,8 +170,8 @@
       </div>
 
       <div class="button-group">
-        <button type="submit" [disabled]="editForm.invalid">Submit</button>
         <button type="button" (click)="canceledit(editForm)">Cancel</button>
+        <button type="submit" [disabled]="editForm.invalid">Submit</button>
       </div>
 
     </form>

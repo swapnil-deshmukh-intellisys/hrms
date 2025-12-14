@@ -107,7 +107,10 @@ export class ScheduleComponent implements OnInit, OnDestroy {
           title: JSON.stringify({ holiday: h.name }),
           date: new Date(h.date),
           textColor: '#ff4d4d',
-          display: 'block'
+          display: 'block',
+          classNames: ['holiday-event'],
+          backgroundColor: '#FFD700',
+          borderColor: '#FFA500'
         }));
 
         this.calendarOptions = {
@@ -229,7 +232,10 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       title: JSON.stringify({ holiday: holiday.name }),
       date: holiday.date,
       textColor: '#ff4d4d',
-      display: 'block'
+      display: 'block',
+      classNames: ['holiday-event'],
+      backgroundColor: '#FFD700',
+      borderColor: '#FFA500'
     }));
 
     this.calendarOptions = {

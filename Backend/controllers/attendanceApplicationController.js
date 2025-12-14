@@ -1,4 +1,5 @@
 const AttendanceApplication = require('../models/AttendanceApplication');
+const Notification = require('../models/Notification');
 
 // ✅ Submit Application
 exports.submitAttendance = async (req, res) => {
@@ -6,6 +7,17 @@ exports.submitAttendance = async (req, res) => {
     const data = req.body;
     const newApp = new AttendanceApplication(data);
     await newApp.save();
+    
+    // Create notification for admin
+    await Notification.create({
+      recipient: 'all',
+      type: 'attendance',
+      title: 'New Attendance Application',
+      message: `${data.employeeName || data.name || 'An employee'} has submitted an attendance application`,
+      actionRoute: '/attendance-approval',
+      createdAt: new Date()
+    });
+    
     res.status(200).json({ message: 'Attendance application submitted successfully' });
   } catch (err) {
     console.error(err);

@@ -1,52 +1,11 @@
-.login-type-toggle {
-  display: flex;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.login-type-toggle button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  background-color: #f0f0f0;
-  color: #333;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.login-type-toggle button.active {
-  background-color: #000;
-  color: white;
-}
-
-.login-type-toggle button:first-child {
-  border-right: 1px solid #ddd;
-}
-
-/* Update the button style to match the toggle */
-.login-form button[type="submit"] {
-  margin-top: 10px;
-  background-color: #000;
-  color: white;
-}
-
-.login-form button[type="submit"]:hover {
-  background-color: #333;
-}
-
-
-
-
-
-/* Overall Page */
+/* Login Page - Matching Application Theme */
 .login-page {
   display: flex;
   height: 100vh;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
+  background: transparent;
+  overflow: hidden;
 }
 
 /* Left Section */
@@ -56,35 +15,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 2rem;
   text-align: center;
   box-sizing: border-box;
-  color: #fefafa;
+  background: transparent;
+  color: #273F4F;
+  position: relative;
+}
+
+.left-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  color: #273F4F;
+  position: relative;
+  z-index: 1;
 }
 
 .left-section .logo {
-  width: 100%; /* Reduced slightly for better scaling */
-  
-  height: auto; /* Maintain aspect ratio */
- 
- 
-  margin-bottom: 20px;
- 
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .left-section h2 {
-  font-size: 28px;
-  margin-bottom: 15px;
-}
-
-.features {
-  list-style: none;
-  padding: 0;
-}
-
-.features li {
-  margin: 10px 0;
-  font-size: 16px;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* Right Section */
@@ -93,8 +53,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  padding: 10px;
+  background: transparent;
+  padding: 2rem;
+  position: relative;
 }
 
 /* Right Container for Logo and Form */
@@ -103,197 +64,311 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 450px; /* Slightly narrower for aesthetics */
-  background-color: #fff;
-  font-family: 'Arial', sans-serif;
-  padding: 30px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  background: white;
+  font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(39, 63, 79, 0.15);
+  border: 1px solid rgba(239, 238, 234, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.right-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FE7743, #e56a2e);
 }
 
 /* Logo Container */
 .logo-container {
-  margin-bottom: 20px;
-  
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .intellisys-logo {
-  width: 300px; /* Smaller for alignment */
-  height: 130px;
+  width: 280px;
+  height: auto;
+  max-height: 120px;
   border-radius: 10px;
+  object-fit: contain;
 }
 
 /* Login Form Container */
 .login-form-container {
   width: 100%;
-  padding: 20px; /* Add padding for spacing */
+  padding: 0;
+  position: relative;
+  z-index: 1;
 }
 
 /* Login Form */
 .login-form .input-group {
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
 .login-form label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  font-family: 'Arial', sans-serif;
-  font-size: 14px;
-  color: #000000;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+  font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.85rem;
+  color: #273F4F;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  position: relative;
+  padding-left: 0.8rem;
 }
 
-/* Login Form */
+.login-form label::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #FE7743;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Login Form Inputs */
 .login-form input {
-  width: 100%; /* Default reduced width */
-  padding: 8px; /* Default padding */
-  border: 1px solid #080808;
-  border-radius: 5px;
-  font-size: 12px; /* Default font size */
-  margin: 0 auto; /* Centered horizontally */
-  display: block; /* Ensures alignment */
-  font-family: 'Arial', sans-serif;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid rgba(239, 238, 234, 0.8);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  margin: 0;
+  display: block;
+  font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: rgba(239, 238, 234, 0.3);
+  color: #273F4F;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+.login-form input::placeholder {
+  color: #8a9aad;
+  font-weight: 400;
 }
 
 .login-form input:focus {
-  border-color: #38393b;
+  border-color: #FE7743;
   outline: none;
-  
+  box-shadow: 0 0 0 4px rgba(254, 119, 67, 0.1),
+              inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  background: white;
+  transform: translateY(-1px);
 }
 
-/* Responsive Design */
-
+/* Forgot Password Link */
 .forgot-password {
   display: block;
-  margin-top: 10px;
-  font-size: 14px;
-  color: darkorange;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  color: #FE7743;
   text-decoration: none;
   text-align: right;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .forgot-password:hover {
+  color: #e56a2e;
   text-decoration: underline;
 }
 
+/* Submit Button */
+.login-form button[type="submit"],
 button {
   width: 100%;
-  padding: 12px;
-  background-color: black;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(135deg, #273F4F 0%, #1a2c38 100%);
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(39, 63, 79, 0.3);
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0.5rem;
 }
 
+.login-form button[type="submit"]::before,
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.login-form button[type="submit"]:hover,
 button:hover {
-  background-color: #636365;
+  background: linear-gradient(135deg, #1a2c38 0%, #0f1c24 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(39, 63, 79, 0.4);
+}
+
+.login-form button[type="submit"]:hover::before,
+button:hover::before {
+  left: 100%;
+}
+
+/* Error Messages */
+.error {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: 8px;
+  border-left: 3px solid #e74c3c;
+}
+
+.error small {
+  display: block;
+  margin-top: 0.2rem;
 }
 
 /* Sign-Up Link */
 .signin-link {
-  margin-top: 20px;
+  margin-top: 1.5rem;
   text-align: center;
 }
 
 .signin-link a {
-  color: darkorange;
+  color: #FE7743;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
 
 .signin-link a:hover {
+  color: #e56a2e;
   text-decoration: underline;
-}
-.error {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 5px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .login-page {
-    flex-direction: column; /* Stacks sections vertically */
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
   }
 
   .left-section {
-    padding: 20px;
+    padding: 1.5rem;
+    min-height: 200px;
   }
 
   .left-section .logo {
-    width: 80%; /* Adjust size for smaller screens */
-    max-width: 200px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+  }
+
+  .left-section h1 {
+    font-size: 2rem;
+    color: #273F4F;
   }
 
   .right-section {
-    padding: 15px;
+    padding: 1.5rem;
+    flex: 1;
   }
 
   .right-container {
-    max-width: 350px; /* Reduce form width on smaller screens */
-    padding: 20px;
+    max-width: 100%;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
   }
 
   .intellisys-logo {
-    width: 120px; /* Adjust logo size for smaller screens */
-  }
-  .login-form input {
-    width: 90%; /* Wider for smaller screens */
-    padding: 6px; /* Less padding on smaller screens */
-    font-size: 11px; /* Slightly smaller font size */
-  }
-}
-@media (max-width: 480px) {
-  .login-page {
-    flex-direction: column; /* Stacks sections vertically */
-  }
-
-  .left-section {
-    padding: 15px;
-    text-align: center; /* Center align for smaller screens */
-  }
-
-  .left-section .logo {
-    width: 70%; /* Further reduce size for smaller screens */
-    max-width: 150px;
-  }
-
-  .right-section {
-    padding: 10px;
-  }
-
-  .right-container {
-    max-width: 300px; /* Further reduce form width */
-    padding: 15px; /* Adjust padding for smaller screens */
-  }
-
-  .intellisys-logo {
-    width: 100px; /* Smaller logo size */
+    width: 200px;
+    max-height: 100px;
   }
 
   .login-form input {
-    width: 100%; /* Full width for very small screens */
-    padding: 5px; /* Reduced padding */
-    font-size: 10px; /* Smaller font size */
+    padding: 0.7rem 0.9rem;
+    font-size: 0.85rem;
   }
 
   .login-form label {
-    font-size: 12px; /* Slightly smaller label font size */
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    flex-direction: column;
+  }
+
+  .left-section {
+    padding: 1rem;
+    min-height: 150px;
+  }
+
+  .left-section .logo {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+  }
+
+  .left-section h1 {
+    font-size: 1.8rem;
+    color: #273F4F;
+  }
+
+  .right-section {
+    padding: 1rem;
+  }
+
+  .right-container {
+    max-width: 100%;
+    padding: 1.5rem 1.2rem;
+    border-radius: 12px;
+  }
+
+  .intellisys-logo {
+    width: 180px;
+    max-height: 90px;
+  }
+
+  .login-form input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .login-form label {
+    font-size: 0.75rem;
   }
 
   .forgot-password {
-    font-size: 12px; /* Smaller font for the link */
+    font-size: 0.8rem;
   }
 
   button {
-    font-size: 14px; /* Slightly smaller button text */
-    padding: 10px; /* Adjust button padding */
+    font-size: 0.85rem;
+    padding: 0.8rem 1.5rem;
   }
 
-  .signin-link p {
-    font-size: 12px; /* Smaller font for the sign-up link */
+  .signin-link a {
+    font-size: 0.85rem;
   }
 }

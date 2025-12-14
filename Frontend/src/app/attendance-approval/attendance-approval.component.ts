@@ -3,6 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { API_CONFIG } from '../config/api.config';
+import { MatIconModule } from '@angular/material/icon';
 
 interface AttendanceRequest {
   _id: any;
@@ -47,7 +48,7 @@ interface Holiday {
 @Component({
   selector: 'app-attendance-approval',
   standalone: true,
-  imports: [CommonModule, DatePipe, FormsModule],
+  imports: [CommonModule, DatePipe, FormsModule, MatIconModule],
   templateUrl: './attendance-approval.component.html',
   styleUrls: ['./attendance-approval.component.css']
 })

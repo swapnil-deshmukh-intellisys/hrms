@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { API_CONFIG } from '../config/api.config';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-top-nav',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.css']
 })
@@ -87,12 +88,17 @@ export class TopNavComponent implements OnInit {
     const token = this.authService.getToken();
     return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
-  // ✅ Detect clicks outside the menu to auto-close
+  // ✅ Detect clicks outside the menu and notifications to auto-close
   @HostListener('document:click', ['$event'])
   onOutsideClick(event: MouseEvent): void {
     const clickedInside = this.elRef.nativeElement.contains(event.target);
-    if (!clickedInside && this.isMenuOpen) {
-      this.isMenuOpen = false;
+    if (!clickedInside) {
+      if (this.isMenuOpen) {
+        this.isMenuOpen = false;
+      }
+      if (this.showNotifications) {
+        this.showNotifications = false;
+      }
     }
   }
 }

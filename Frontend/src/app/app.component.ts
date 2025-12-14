@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
+import { AlertComponent } from './components/alert/alert.component';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, SidebarComponent, TopNavComponent, CommonModule],
+  imports: [RouterModule, SidebarComponent, TopNavComponent, CommonModule, AlertComponent],
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

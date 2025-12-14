@@ -1,5 +1,11 @@
 <div class="approval-container">
-  <h2 class="heading">Resignation Approval Requests</h2>
+  <!-- Header -->
+  <div class="header-container">
+    <h2 class="heading">
+      <mat-icon>assignment</mat-icon>
+      Resignation Approval Requests
+    </h2>
+  </div>
 
   <div *ngFor="let request of resignationRequests; let i = index" class="notification-card">
     <div class="notification-header" (click)="toggleRequest(i)">
@@ -34,15 +40,20 @@
       </div>
 
       <div class="action-buttons">
-        <button (click)="approveResignation(i)">✅ Approve</button>
-        <button (click)="rejectResignation(i)">❌ Reject</button>
+        <button (click)="approveResignation(i)"><mat-icon>check_circle</mat-icon> Approve</button>
+        <button (click)="rejectResignation(i)"><mat-icon>cancel</mat-icon> Reject</button>
       </div>
     </div>
   </div>
 </div>
 
 <div class="history-section">
-  <h2 class="heading">Resignation History</h2>
+  <div class="header-container">
+    <h2 class="heading">
+      <mat-icon>history</mat-icon>
+      Resignation History
+    </h2>
+  </div>
   
   <div class="history-tabs">
     <button 
@@ -79,7 +90,23 @@
           <td>{{ resignation.empName }}</td>
           <td>{{ resignation.department }}</td>
           <td>{{ resignation.lastWorkingDay | date:'dd/MM/yyyy' }}</td>
-          <td>{{ resignation.reason }}</td>
+          <td class="reason-cell">
+            <div class="reason-content">
+              <span *ngIf="!isReasonExpanded(resignation, 'approved')">
+                {{ getTruncatedReason(resignation.reason) }}
+              </span>
+              <span *ngIf="isReasonExpanded(resignation, 'approved')">
+                {{ resignation.reason }}
+              </span>
+              <button 
+                *ngIf="shouldShowViewMore(resignation.reason)"
+                class="view-more-btn"
+                (click)="toggleReason(resignation, 'approved')"
+                type="button">
+                {{ isReasonExpanded(resignation, 'approved') ? 'View Less' : 'View More' }}
+              </button>
+            </div>
+          </td>
           <td>{{ resignation.approvedDate | date:'dd/MM/yyyy' }}</td>
           <td><span class="status-badge approved">Approved</span></td>
         </tr>
@@ -110,9 +137,41 @@
           <td>{{ resignation.empName }}</td>
           <td>{{ resignation.department }}</td>
           <td>{{ resignation.lastWorkingDay | date:'dd/MM/yyyy' }}</td>
-          <td>{{ resignation.reason }}</td>
+          <td class="reason-cell">
+            <div class="reason-content">
+              <span *ngIf="!isReasonExpanded(resignation, 'rejected')">
+                {{ getTruncatedReason(resignation.reason) }}
+              </span>
+              <span *ngIf="isReasonExpanded(resignation, 'rejected')">
+                {{ resignation.reason }}
+              </span>
+              <button 
+                *ngIf="shouldShowViewMore(resignation.reason)"
+                class="view-more-btn"
+                (click)="toggleReason(resignation, 'rejected')"
+                type="button">
+                {{ isReasonExpanded(resignation, 'rejected') ? 'View Less' : 'View More' }}
+              </button>
+            </div>
+          </td>
           <td>{{ resignation.rejectedDate | date:'dd/MM/yyyy' }}</td>
-          <td>{{ resignation.rejectionReason || 'Not specified' }}</td>
+          <td class="reason-cell">
+            <div class="reason-content">
+              <span *ngIf="!isReasonExpanded(resignation, 'rejected-reason')">
+                {{ getTruncatedReason(resignation.rejectionReason || 'Not specified') }}
+              </span>
+              <span *ngIf="isReasonExpanded(resignation, 'rejected-reason')">
+                {{ resignation.rejectionReason || 'Not specified' }}
+              </span>
+              <button 
+                *ngIf="shouldShowViewMore(resignation.rejectionReason || 'Not specified')"
+                class="view-more-btn"
+                (click)="toggleReason(resignation, 'rejected-reason')"
+                type="button">
+                {{ isReasonExpanded(resignation, 'rejected-reason') ? 'View Less' : 'View More' }}
+              </button>
+            </div>
+          </td>
         </tr>
         <tr *ngIf="rejectedResignations.length === 0">
           <td colspan="7" class="no-data">No rejected resignations found</td>

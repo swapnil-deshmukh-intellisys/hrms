@@ -1,10 +1,11 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   standalone: true,
   selector: 'app-holiday',
-  imports: [CommonModule, NgFor],
+  imports: [CommonModule, NgFor, MatIconModule],
   templateUrl: './holiday.component.html',
   styleUrls: ['./holiday.component.css']
 })

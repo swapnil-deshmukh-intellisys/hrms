@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { API_CONFIG } from '../config/api.config';
+import { MatIconModule } from '@angular/material/icon';
 
 /** Custom validator to check if the date is in the future */
 export const futureDateValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -22,7 +23,8 @@ export const futureDateValidator: ValidatorFn = (control: AbstractControl): Vali
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ]
 })
 export class LeaveComponent implements OnInit {
