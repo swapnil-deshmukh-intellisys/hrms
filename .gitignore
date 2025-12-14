@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+build/
+.angular/
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS files
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Uploads and user-generated content
+Backend/uploads/
+Frontend/uploads/
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.zip
+*.rar
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Commit planning files (helper scripts)
+commit-plan.md
+create-commits.ps1
+interactive-commits.ps1
+README-COMMITS.md
+QUICK-COMMIT-GUIDE.md
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Misc
+.vercel/
+.vercelignore
+

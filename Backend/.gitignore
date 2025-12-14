@@ -2,3 +2,28 @@ node_modules/
 dist/
 .env/
 .angular/
+
+# Uploads - user-uploaded files should not be in git
+uploads/
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.zip
+*.rar
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
