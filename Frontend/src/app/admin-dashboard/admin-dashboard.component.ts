@@ -6,11 +6,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChartConfiguration } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
+import { MatIconModule } from '@angular/material/icon';
+import { API_CONFIG } from '../config/api.config';
+import { AdminNavbarComponent } from '../admin-navbar/admin-navbar.component';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgChartsModule],
+  imports: [CommonModule, FormsModule, NgChartsModule, MatIconModule, AdminNavbarComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
 })
@@ -27,11 +30,14 @@ export class AdminDashboardComponent implements OnInit {
   imageUrl = 'assets/employee (1).png';
   dob = '1990-07-15';
   currentTime = '';
+  timeDigits: { hours: string[], minutes: string[], seconds: string[] } = {
+    hours: ['0', '0'],
+    minutes: ['0', '0'],
+    seconds: ['0', '0']
+  };
   currentDate = '';
   gender: string = '';
   showProfile = false;
-  showNotifications = false;
-  unreadNotificationsCount = 0;
   
   // Employee data
   emp: any = {
@@ -49,7 +55,6 @@ export class AdminDashboardComponent implements OnInit {
   birthdaysThisMonth: any[] = [];
   allEmployees: any[] = [];
   filteredEmployees: any[] = [];
-  notifications: any[] = [];
   
   // Edit states
   editingWelcome = false;
@@ -135,7 +140,7 @@ export class AdminDashboardComponent implements OnInit {
     { name: 'Akshay Kumar', dept: 'Sales', title: 'Sales Representative', status: 'Active' }
   ];
 
-  private readonly API_URL = 'http://localhost:5000/api/employees';
+  private readonly API_URL = `${API_CONFIG.baseUrl}/employees`;
   private readonly STORAGE_KEY = 'admin_dashboard_data';
 
   constructor(
@@ -153,7 +158,6 @@ export class AdminDashboardComponent implements OnInit {
     this.getUpcomingBirthdays();
     this.loadDashboardData();
     this.loadLocalData();
-    this.loadNotifications();
   }
 
   private loadLocalData(): void {
@@ -179,38 +183,7 @@ export class AdminDashboardComponent implements OnInit {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
   }
 
-  // Notification methods
-  toggleNotifications(): void {
-    this.showNotifications = !this.showNotifications;
-    if (this.showNotifications) {
-      this.markNotificationsAsRead();
-    }
-  }
-
-  loadNotifications(): void {
-    const headers = this.createAuthHeaders();
-    this.http.get<any>(`${this.API_URL}/notifications`, { headers }).subscribe({
-      next: (res) => {
-        this.notifications = res?.notifications || [];
-        this.unreadNotificationsCount = this.notifications.filter(n => !n.isRead).length;
-      },
-      error: (err) => console.error('Error loading notifications:', err),
-    });
-  }
-
-  markNotificationsAsRead(): void {
-    const headers = this.createAuthHeaders();
-    this.http.post(`${this.API_URL}/notifications/mark-as-read`, {}, { headers }).subscribe({
-      next: () => {
-        this.notifications = this.notifications.map(notification => ({
-          ...notification,
-          isRead: true
-        }));
-        this.unreadNotificationsCount = 0;
-      },
-      error: (err) => console.error('Error marking notifications as read:', err),
-    });
-  }
+  // Notification methods removed - now handled by AdminNavbarComponent
 
   getTitlePrefix(): string {
     if (!this.gender) return '';
@@ -221,7 +194,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   private loadDashboardData(): void {
-    this.http.get<any>('http://localhost:5000/api/admin-dashboard/public').subscribe({
+    this.http.get<any>(`${API_CONFIG.baseUrl}/admin-dashboard/public`).subscribe({
       next: (data) => {
         this.welcomeMessage = data?.welcomeMessage || '';
         this.newsItems = data?.newsItems || [];
@@ -248,7 +221,7 @@ export class AdminDashboardComponent implements OnInit {
       reminders: this.reminders
     };
 
-    this.http.put<any>('http://localhost:5000/api/admin-dashboard', data).subscribe({
+    this.http.put<any>(`${API_CONFIG.baseUrl}/admin-dashboard`, data).subscribe({
       next: () => console.log('Dashboard data saved'),
       error: (err) => console.error('Error saving dashboard:', err)
     });
@@ -331,7 +304,7 @@ export class AdminDashboardComponent implements OnInit {
         this.imageUrl = emp.image?.startsWith('http')
           ? emp.image
           : emp.image
-            ? `${this.API_URL}/${emp.image}`
+            ? `https://hrms-backend-x5bb.onrender.com/${emp.image}`
             : 'assets/employee (1).png';
       },
       error: (err) => console.error('Error fetching employee details:', err),
@@ -350,6 +323,21 @@ export class AdminDashboardComponent implements OnInit {
       minute: '2-digit',
       second: '2-digit',
     });
+    
+    // Split time into individual digits for animation
+    const timeStr = now.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    
+    const parts = timeStr.split(':');
+    if (parts.length === 3) {
+      this.timeDigits.hours = parts[0].padStart(2, '0').split('');
+      this.timeDigits.minutes = parts[1].padStart(2, '0').split('');
+      this.timeDigits.seconds = parts[2].padStart(2, '0').split('');
+    }
   }
 
   private setCurrentDate(): void {
@@ -584,11 +572,7 @@ export class AdminDashboardComponent implements OnInit {
       : this.empDocuments;
   }
 
-  // Utility methods
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
+  // Logout method removed - now handled by AdminNavbarComponent
 
   toggleProfile(): void {
     this.showProfile = !this.showProfile;
