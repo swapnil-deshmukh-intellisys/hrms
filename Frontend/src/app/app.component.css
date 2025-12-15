@@ -10,14 +10,16 @@
   display: flex; /* Flexbox for alignment */
   flex-direction: row; /* Sidebar and content side by side */
   height: 100vh; /* Full height */
+  width: 100%;
+  position: relative;
 }
 
 /* Top navigation bar */
 .top-nav {
   width: 100%; /* Full width */
   height: 60px; /* Height of the header */
-  background-color: #333; /* Example background color */
-  color: white; /* Example text color */
+  background-color: #273F4F; /* Gray theme color */
+  color: #EFEEEA; /* White theme color */
   display: flex;
   align-items: center;
   justify-content: space-between; /* Adjust content within the nav bar */
@@ -25,27 +27,26 @@
   top: 0;
   left: 0;
   z-index: 1000; /* Ensure it's on top of other content */
+  border-bottom: 2px solid #FE7743; /* Orange border */
 }
 
-/* Sidebar */
-.app-sidebar {
-  width: 15%; /* Adjusted sidebar width (15% of total width) */
-  background-color: #f4f4f4; /* Example background color */
-  height: 100%; /* Full height of the content area */
-  position: fixed; /* Keeps the sidebar fixed on the left */
-  top: 60px; /* Adjust for the height of the top nav */
-  left: 0;
-  z-index: 500; /* Make sure it doesn't overlap other elements */
-}
+/* Sidebar - handled by sidebar component CSS */
+/* The sidebar component has its own fixed positioning */
 
-/* Main content */
+/* Main content - no spacing by default */
 .main-content {
- 
   flex: 1; /* Use remaining space */
-  background-color: #ffffff; /* Example background color */
-  height: 100vh; /* Full height */
-  padding: 20px; /* Optional padding for content */
- 
+  background-color: transparent; /* No background - let pages control their own */
+  min-height: 100vh; /* Full height */
+  box-sizing: border-box;
+}
+
+/* Add spacing only when sidebar is present */
+.page-layout.with-sidebar .main-content {
+  margin-left: 240px; /* Account for fixed sidebar width */
+  width: calc(100% - 240px); /* Ensure content takes remaining width */
+  /* padding: 20px; Padding for content */
+  box-sizing: border-box;
 }
 
 /* Mobile layout adjustments */
@@ -66,7 +67,10 @@
     display: block; /* Show mobile navigation */
   }
 
-  .main-content {
-    margin-left: 0; /* Remove margin when sidebar is hidden */
+  /* Remove sidebar spacing on mobile */
+  .page-layout.with-sidebar .main-content {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 60px; /* Account for fixed top navigation */
   }
 }

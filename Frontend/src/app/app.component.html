@@ -1,4 +1,4 @@
-<div class="page-layout">
+<div class="page-layout" [class.with-sidebar]="shouldShowComponents">
   <!-- Only show TopNav and Sidebar on routes other than 'login' and 'signup' -->
   <div class="page-layout1">
   <app-top-nav class="top-nav mobile-only" *ngIf="shouldShowComponents"></app-top-nav>
@@ -13,4 +13,7 @@
       <router-outlet></router-outlet> <!-- Routed content goes here -->
   </div>
 </div>
+
+<!-- Global Alert Component -->
+<app-alert></app-alert>
 
