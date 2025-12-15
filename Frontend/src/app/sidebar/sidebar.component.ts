@@ -1,24 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';  // Import CommonModule for standalone components
 import { RouterModule } from '@angular/router';
-import { NgIf } from '@angular/common'; 
+import { NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,  // Indicates this is a standalone component
-  imports: [CommonModule,RouterModule,NgIf ],  // Import CommonModule for built-in Angular features like ngIf, ngFor, etc.
+  imports: [CommonModule, RouterModule, NgIf, MatIconModule],  // Import CommonModule for built-in Angular features like ngIf, ngFor, etc.
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   isDropdownOpen = {
-    home: false,
-    profile: false,
     payroll: false
   };
   role: string = '';
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.role = localStorage.getItem('role') || '';
   }
 
