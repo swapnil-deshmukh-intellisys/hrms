@@ -10,11 +10,6 @@
       </div>
 
       <div class="login-form-container">
-        <!-- Loading Overlay -->
-        <div class="loading-overlay" *ngIf="isLoading">
-          <div class="spinner"></div>
-        </div>
-        
         <form
           class="login-form"
           #loginForm="ngForm"
@@ -26,44 +21,52 @@
             <small>Username or password is incorrect.</small>
           </div>
 
-          <!-- Username/Email Input -->
-          <div class="input-group">
-            <label for="username">Username/Email</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              ngModel
-              required
-              minlength="3"
-              maxlength="50"
-              placeholder="Enter your username or email"
-              [disabled]="isLoading"
-              #username="ngModel"
-            />
-            <!-- Username Validation Errors -->
-            <div class="error" *ngIf="submitted">
-              <small *ngIf="username.errors?.['required']">Username is required.</small>
+          <!-- Input Fields Section with Loading Overlay -->
+          <div class="inputs-section" [class.loading-active]="isLoading">
+            <!-- Loading Overlay for Inputs Only -->
+            <div class="loading-overlay" *ngIf="isLoading">
+              <div class="spinner"></div>
             </div>
-          </div>
 
-          <!-- Password Input -->
-          <div class="input-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              ngModel
-              required
-              minlength="6"
-              [disabled]="isLoading"
-              placeholder="Enter your password"
-              #password="ngModel"
-            />
-            <!-- Password Validation Errors -->
-            <div class="error" *ngIf="submitted">
-              <small *ngIf="password.errors?.['required']">Password is required.</small>
+            <!-- Username/Email Input -->
+            <div class="input-group">
+              <label for="username">Username/Email</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                ngModel
+                required
+                minlength="3"
+                maxlength="50"
+                placeholder="Enter your username or email"
+                [disabled]="isLoading"
+                #username="ngModel"
+              />
+              <!-- Username Validation Errors -->
+              <div class="error" *ngIf="submitted">
+                <small *ngIf="username.errors?.['required']">Username is required.</small>
+              </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                ngModel
+                required
+                minlength="6"
+                [disabled]="isLoading"
+                placeholder="Enter your password"
+                #password="ngModel"
+              />
+              <!-- Password Validation Errors -->
+              <div class="error" *ngIf="submitted">
+                <small *ngIf="password.errors?.['required']">Password is required.</small>
+              </div>
             </div>
           </div>
 

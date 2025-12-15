@@ -108,20 +108,25 @@
   z-index: 1;
 }
 
-/* Loading Overlay */
+/* Inputs Section */
+.inputs-section {
+  position: relative;
+}
+
+/* Loading Overlay - Only covers inputs area */
 .loading-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  border-radius: 20px;
-  backdrop-filter: blur(2px);
+  z-index: 5;
+  border-radius: 12px;
+  pointer-events: none;
 }
 
 /* Spinner */
