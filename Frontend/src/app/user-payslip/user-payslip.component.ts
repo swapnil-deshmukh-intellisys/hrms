@@ -4,7 +4,11 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { HttpClient } from '@angular/common/http';
+import { API_CONFIG } from '../config/api.config';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-payslip-download',
@@ -14,7 +18,9 @@ import { HttpClient } from '@angular/common/http';
     ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule,
+    MatInputModule
   ],
   templateUrl: './user-payslip.component.html',
   styleUrls: ['./user-payslip.component.css']
@@ -22,6 +28,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserPayslipComponentComponent {
   monthControl = new FormControl('');
   private http = inject(HttpClient);
+  private alertService = inject(AlertService);
 
   empId: string = 'E001';   // ✅ You can fetch this dynamically from logged-in user
   months: string[] = [
@@ -32,11 +39,11 @@ export class UserPayslipComponentComponent {
   downloadPayslip() {
     const selectedMonth = this.monthControl.value;
     if (!selectedMonth) {
-      alert("Please select a month");
+      this.alertService.warning("Please select a month");
       return;
     }
 
-    const url = `http://localhost:5000/api/payslips/download?empId=${this.empId}&month=${selectedMonth}`;
+    const url = `${API_CONFIG.baseUrl}/payslips/download?empId=${this.empId}&month=${selectedMonth}`;
 
     this.http.get(url, { responseType: 'blob' }).subscribe({
       next: (blob) => {
@@ -46,10 +53,11 @@ export class UserPayslipComponentComponent {
         a.download = `Payslip-${this.empId}-${selectedMonth}.pdf`;
         a.click();
         window.URL.revokeObjectURL(downloadUrl);
+        this.alertService.success(`Payslip for ${selectedMonth} downloaded successfully!`);
       },
       error: (error) => {
         console.error('Download error:', error);
-        alert(`Payslip for ${this.empId} in ${selectedMonth} not found or server error.`);
+        this.alertService.error(`Payslip for ${this.empId} in ${selectedMonth} not found or server error.`);
       }
     });
   }
