@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 import { EmployeeService } from '../services/employee.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-employee-profile',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule, MatIconModule],
   templateUrl: './employee-profile.component.html',
   styleUrls: ['./employee-profile.component.css']
 })
