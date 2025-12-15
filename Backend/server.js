@@ -38,8 +38,33 @@ const DB_URI = process.env.MONGO_URI;
 
 console.log(`🌍 Connecting to MongoDB at: ${DB_URI}`);
 
-// ✅ Middleware
-app.use(cors({ origin: process.env.CORS_ORIGIN?.split(',') || '*' }));
+// ✅ Middleware - CORS Configuration
+const allowedOrigins = process.env.CORS_ORIGIN 
+  ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim())
+  : [
+      'https://hrms-one-liart.vercel.app',
+      'https://hrms-git-main-swapnil-deshmukh-intellisys-projects.vercel.app',
+      'https://hrms-5rxh8ezcz-swapnil-deshmukh-intellisys-projects.vercel.app',
+      'http://localhost:4200',
+      'http://localhost:3000'
+    ];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.json({ limit: '10mb' }));
