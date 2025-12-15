@@ -1,13 +1,16 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
 import { EmployeeService } from '../services/employee.service';
+import { API_CONFIG } from '../config/api.config';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-payslip',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatIconModule],
   providers: [EmployeeService], // Optional if already provided globally
   templateUrl: './payslip.component.html',
   styleUrls: ['./payslip.component.css']
@@ -28,7 +31,8 @@ export class PayslipComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -70,7 +74,7 @@ export class PayslipComponent implements OnInit {
     const file: File = event.target.files[0];
     if (file) {
       if (file.type !== 'application/pdf') {
-        alert('Please select a PDF file only.');
+        this.alertService.error('Please select a PDF file only.');
         this.selectedFiles[empId] = null;
         event.target.value = '';
       } else {
@@ -84,7 +88,7 @@ export class PayslipComponent implements OnInit {
     const file = this.selectedFiles[empId];
 
     if (!month || !file) {
-      alert('Please select a month and upload a PDF file.');
+      this.alertService.warning('Please select a month and upload a PDF file.');
       return;
     }
 
@@ -93,9 +97,9 @@ export class PayslipComponent implements OnInit {
     formData.append('month', month);
     formData.append('payslip', file);
 
-    this.http.post('http://localhost:5000/api/payslips/upload', formData).subscribe({
+    this.http.post(`${API_CONFIG.baseUrl}/payslips/upload`, formData).subscribe({
       next: () => {
-        alert('Payslip uploaded successfully');
+        this.alertService.success('Payslip uploaded successfully');
         this.selectedMonths[empId] = undefined;
         this.selectedFiles[empId] = null;
 
@@ -105,7 +109,7 @@ export class PayslipComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error uploading:', err);
-        alert('Upload failed');
+        this.alertService.error('Upload failed');
       }
     });
   }
