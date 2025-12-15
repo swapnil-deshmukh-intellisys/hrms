@@ -1,23 +1,31 @@
-<div class="container">
-    <!-- Navbar -->
-    <div class="navbar">
-      <h2>Intellisys IT Solutions Private Limited</h2>
-    </div>
-  
-    <div class="heading">
-      <h4>Holiday List</h4>
-    </div>
-  
-    <!-- Holiday List Display -->
-    <div class="holiday-wrapper">
-      <div *ngFor="let month of orderedMonths">
-        <h4 class="month-name">{{ month }}</h4>
+<div class="holiday-container">
+  <!-- Heading -->
+  <div class="heading">
+    <h4>
+      <mat-icon>event</mat-icon>
+      Holiday List
+    </h4>
+  </div>
+
+  <!-- Holiday List Display -->
+  <div class="holiday-wrapper">
+    <div *ngFor="let month of orderedMonths" class="month-section">
+      <h4 class="month-name">
+        <mat-icon>calendar_month</mat-icon>
+        {{ month }}
+      </h4>
+      <div class="holiday-list">
         <div *ngFor="let holiday of groupedHolidays[month]" class="holiday-row">
           <div class="date-box">
+            <mat-icon class="date-icon">event</mat-icon>
             <span class="date">{{ holiday.date | date: 'MMM dd' }}</span>
           </div>
-          <div class="holiday-name">{{ holiday.name }}</div>
+          <div class="holiday-name">
+            <mat-icon class="holiday-icon">celebration</mat-icon>
+            {{ holiday.name }}
+          </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
