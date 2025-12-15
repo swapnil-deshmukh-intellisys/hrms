@@ -15,6 +15,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import moment from 'moment';
 import { HttpClient } from '@angular/common/http';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-schedule',
@@ -100,13 +101,16 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   }
 
   loadHolidayEventsFromBackend(): void {
-    this.http.get<any[]>('http://localhost:5000/api/holidays/all').subscribe({
+    this.http.get<any[]>(`${API_CONFIG.baseUrl}/holidays/all`).subscribe({
       next: (data) => {
         const holidayEvents = data.map(h => ({
           title: JSON.stringify({ holiday: h.name }),
           date: new Date(h.date),
           textColor: '#ff4d4d',
-          display: 'block'
+          display: 'block',
+          classNames: ['holiday-event'],
+          backgroundColor: '#FFD700',
+          borderColor: '#FFA500'
         }));
 
         this.calendarOptions = {
@@ -123,7 +127,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   }
 
   loadApprovedAttendanceApplications(): void {
-  this.http.get<any[]>('http://localhost:5000/api/attendance-application/approved')
+  this.http.get<any[]>(`${API_CONFIG.baseUrl}/attendance-application/approved`)
     .subscribe({
       next: (data) => {
         data.forEach(item => {
@@ -228,7 +232,10 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       title: JSON.stringify({ holiday: holiday.name }),
       date: holiday.date,
       textColor: '#ff4d4d',
-      display: 'block'
+      display: 'block',
+      classNames: ['holiday-event'],
+      backgroundColor: '#FFD700',
+      borderColor: '#FFA500'
     }));
 
     this.calendarOptions = {
@@ -280,7 +287,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
     const isLate = markInMoment.isAfter(lateThreshold);
 
-    this.http.post('http://localhost:5000/api/attendance/mark-in', {
+    this.http.post(`${API_CONFIG.baseUrl}/attendance/mark-in`, {
       employeeCode: this.employeeCode
     }).subscribe({
       next: (res: any) => {
@@ -311,7 +318,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.http.post('http://localhost:5000/api/attendance/mark-out', {
+    this.http.post(`${API_CONFIG.baseUrl}/attendance/mark-out`, {
       employeeCode: this.employeeCode
     }).subscribe({
       next: (res: any) => {

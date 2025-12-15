@@ -1,10 +1,9 @@
-<!-- Left Panel -->
-<div class="navbar">
-    <div class="logo">Intellisys IT Solution Pvt Ltd</div>
-  </div>
-
+<!-- Heading -->
 <div class="heading">
-  <h4>Time And Attendance</h4>
+  <h4>
+    <mat-icon>access_time</mat-icon>
+    Time And Attendance
+  </h4>
 </div>
 
 <div class="commondiv">
@@ -13,26 +12,50 @@
   <div class="divleft">
     <div class="dashboard-container">
       <div class="left-panel">
-        <div class="checkbox-container">
+        <!-- Checkbox temporarily commented out - not currently in use -->
+        <!-- <div class="checkbox-container">
           <label>
             <input type="checkbox" [(ngModel)]="isChecked">
           </label>
-        </div>
+        </div> -->
         <div class="header">
-          <h3>Current Date And Time</h3>
+          <h3>
+            <mat-icon>schedule</mat-icon>
+            Current Date And Time
+          </h3>
           <div class="time-display">
-            <p>{{ currentDate }}</p>
-            <p>{{ currentTime }}</p>
+            <p>
+              <mat-icon>calendar_today</mat-icon>
+              {{ currentDate }}
+            </p>
+            <p>
+              <mat-icon>access_time</mat-icon>
+              {{ currentTime }}
+            </p>
           </div>
           <div class="buttons">
-            <button (click)="onMarkInTime()">Mark In Time</button> 
-            <button (click)="onMarkOutTime()">Mark Out Time</button>
+            <button class="mark-in-btn" (click)="onMarkInTime()">
+              <mat-icon>schedule</mat-icon>
+              <span>Mark In Time</span>
+            </button> 
+            <button class="mark-out-btn" (click)="onMarkOutTime()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Mark Out Time</span>
+            </button>
           </div>
           <div class="marked-times">
-            <p><strong>Marked In Time:</strong> {{ markInTime }}</p>
-            <p><strong>Marked Out Time:</strong> {{ markOutTime }}</p>
-            <p><strong>Total Hours:</strong> {{ durationTime }}</p>
-
+            <p>
+              <mat-icon>check_circle</mat-icon>
+              <strong>Marked In Time:</strong> {{ markInTime || 'Not marked' }}
+            </p>
+            <p>
+              <mat-icon>exit_to_app</mat-icon>
+              <strong>Marked Out Time:</strong> {{ markOutTime || 'Not marked' }}
+            </p>
+            <p>
+              <mat-icon>timer</mat-icon>
+              <strong>Total Hours:</strong> {{ durationTime || '0:00' }}
+            </p>
           </div>
         </div>
 
@@ -43,23 +66,17 @@
 
   <!-- Center Panel (Calendar) -->
   <div class="divcenter">
-    <!-- FullCalendar -->
-    <div class="calendar-container">
-      <div class="calendar-box">
-        <div style="text-align: center;">
-         
-        </div>
-
-        <full-calendar [options]="calendarOptions"></full-calendar>
-      </div>
-    </div>
+    <full-calendar [options]="calendarOptions"></full-calendar>
   </div>
 
   <!-- Right Panel -->
   <div class="divright">
     <div class="right-panel">
       <div class="attendance-summary">
-        <h3>Absence In Current Month</h3>
+        <h3>
+          <mat-icon>bar_chart</mat-icon>
+          Attendance Summary
+        </h3>
 
         <!-- Attendance Summary Container -->
         <div class="attendance-container">
@@ -67,12 +84,16 @@
           <div class="attendance-row">
             <div class="attendance-box present">
               <div class="attendance-details">
-                <p class="status-count"> Present {{ attendanceSummary.present }}</p>
+                <mat-icon class="status-icon">check_circle</mat-icon>
+                <p class="status-count">Present</p>
+                <p class="status-number">{{ attendanceSummary.present }}</p>
               </div>
             </div>
             <div class="attendance-box absent">
               <div class="attendance-details">
-                <p class="status-count">Absent {{ attendanceSummary.absent }}</p>
+                <mat-icon class="status-icon">cancel</mat-icon>
+                <p class="status-count">Absent</p>
+                <p class="status-number">{{ attendanceSummary.absent }}</p>
               </div>
             </div>
           </div>
@@ -81,12 +102,16 @@
           <div class="attendance-row">
             <div class="attendance-box leave">
               <div class="attendance-details">
-                <p class="status-count">Attendance (Submit) {{ attendanceSummary.attendanceSubmit }}</p>
+                <mat-icon class="status-icon">send</mat-icon>
+                <p class="status-count">Attendance Submit</p>
+                <p class="status-number">{{ attendanceSummary.attendanceSubmit }}</p>
               </div>
             </div>
             <div class="attendance-box lwp">
               <div class="attendance-details">
-                <p class="status-count">Half Day {{ attendanceSummary.halfDay }}</p>
+                <mat-icon class="status-icon">schedule</mat-icon>
+                <p class="status-count">Half Day</p>
+                <p class="status-number">{{ attendanceSummary.halfDay }}</p>
               </div>
             </div>
           </div>
@@ -94,19 +119,21 @@
           
            
           </div>
-
-         
         </div>
-      </div>
 
-      <!-- Upcoming Holidays Section -->
-      <div class="upcoming-holidays">
-        <h4>
-          Upcoming Holidays
-          <a routerLink="/holiday" class="view-holidays-link"> View Holidays</a>
-        </h4>
-      
-        
+        <!-- Upcoming Holidays Section -->
+        <div class="upcoming-holidays">
+          <h4>
+            <span class="holiday-title">
+              <mat-icon>event</mat-icon>
+              Upcoming Holidays
+            </span>
+            <a routerLink="/holiday" class="view-holidays-link">
+              <mat-icon>arrow_forward</mat-icon>
+              View Holidays
+            </a>
+          </h4>
+        </div>
       </div>
       
     </div>
