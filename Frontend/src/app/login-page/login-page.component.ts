@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
+import { API_CONFIG } from '../config/api.config';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   standalone: true,
@@ -20,17 +22,21 @@ export class LoginPageComponent {
   username: string = 'Rani';
   password: string = 'Rani123';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private alertService: AlertService
+  ) {}
+  
   async login(loginForm: NgForm) {
     if (!loginForm.valid) {
-      alert('❌ Please enter a valid username/email and password.');
+      this.alertService.error('Please enter a valid username/email and password.');
       return;
     }
   
     const { username, password } = loginForm.value;
   
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch(`${API_CONFIG.baseUrl}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -39,7 +45,7 @@ export class LoginPageComponent {
       const data = await response.json();
   
       if (!response.ok || !data.success) {
-        throw new Error(data.message || '❌ Login failed');
+        throw new Error(data.message || 'Login failed');
       }
   
       // ✅ Store user data in localStorage
@@ -50,7 +56,7 @@ export class LoginPageComponent {
       localStorage.setItem('userId', data.userId);
       
   
-      alert(`✅ Login successful! Welcome ${data.username || data.email}`);
+      this.alertService.success(`Login successful! Welcome ${data.username || data.email}`);
   
       if (data.role === 'admin') {
         this.router.navigate(['/admin-dashboard']);
@@ -59,7 +65,7 @@ export class LoginPageComponent {
       }
 
     } catch (error: unknown) {
-      alert(error instanceof Error ? error.message : '❌ An unexpected error occurred.');
+      this.alertService.error(error instanceof Error ? error.message : 'An unexpected error occurred.');
     }
   }
 }
