@@ -214,7 +214,8 @@
 
 /* Current Time Box */
 .content1-box {
-  background: linear-gradient(135deg, #273F4F 0%, #1a2c38 100%);
+  /* Premium gradient to match nav/sidebar */
+  background: radial-gradient(circle at top left, #314a5e 0%, #273f4f 40%, #1a2c38 80%, #141c24 100%);
   color: #EFEEEA;
   text-align: center;
   border: none;
@@ -327,13 +328,23 @@
 }
 
 .date-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.85rem;
-  margin: 1rem 0 0 0;
-  font-weight: 500;
-  color: #EFEEEA;
-  opacity: 0.9;
+  margin: 1.1rem 0 0 0;
+  font-weight: 600;
+  color: #ff4d4f; /* Red accent */
+  opacity: 0.98;
   position: relative;
   z-index: 1;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 77, 79, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 /* Responsive Design for Clock */

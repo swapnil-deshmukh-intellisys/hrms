@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-right',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './right.component.html',
   styleUrls: ['./right.component.css'],
 })
@@ -27,6 +28,11 @@ export class RightComponent implements OnInit {
   dob: string = '';
   currentTime = '';
   currentDate = '';
+  timeDigits: { hours: string[]; minutes: string[]; seconds: string[] } = {
+    hours: ['0', '0'],
+    minutes: ['0', '0'],
+    seconds: ['0', '0'],
+  };
    gender: string = '';
   showProfile = false;
   showNotifications = false;
@@ -207,6 +213,21 @@ markNotificationsAsRead() {
       minute: '2-digit',
       second: '2-digit',
     });
+
+    // Split time into individual digits for animated clock (24-hour format)
+    const timeStr = now.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+
+    const parts = timeStr.split(':');
+    if (parts.length === 3) {
+      this.timeDigits.hours = parts[0].padStart(2, '0').split('');
+      this.timeDigits.minutes = parts[1].padStart(2, '0').split('');
+      this.timeDigits.seconds = parts[2].padStart(2, '0').split('');
+    }
   }
 
   logout(): void {

@@ -21,7 +21,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 30px;
-  background: linear-gradient(135deg, #273F4F 0%, #1a2c38 100%);
+  /* Match premium sidebar/top-nav/admin-nav gradient */
+  background: radial-gradient(circle at top left, #314a5e 0%, #273f4f 40%, #1c2b36 80%, #141c24 100%);
   height: 70px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -36,11 +37,15 @@
 }
 
 .company-name {
-  font-size: 20px;
-  font-weight: 600;
-  color: #EFEEEA;
-  letter-spacing: 0.5px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 21px;
+  font-weight: 700;
+  background: linear-gradient(120deg, #ffffff, #ffe0d0, #ffb38a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -154,15 +159,22 @@
   background-color: rgba(254, 119, 67, 0.1);
 }
 
+/* Notification icon styling to match admin navbar */
 .company-bar .notification-icon {
-  width: 28px;
-  height: 28px;
+  font-size: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+  color: #EFEEEA !important;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 .company-bar .notification-container:hover .notification-icon {
   transform: scale(1.15);
+  color: #FE7743 !important;
 }
 
 .company-bar .notification-badge {
@@ -171,14 +183,26 @@
   right: -5px;
   background: linear-gradient(135deg, #FF6B6B 0%, #FF4757 100%);
   color: white;
-  border-radius: 50%;
-  padding: 4px 8px;
-  font-size: 11px;
+  border-radius: 12px;
+  padding: 2px 6px;
+  font-size: 10px;
   font-weight: 700;
-  min-width: 20px;
+  min-width: 18px;
+  height: 18px;
   text-align: center;
+  line-height: 14px;
   box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
   animation: pulse 2s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-bar .notification-badge.badge-large {
+  min-width: 24px;
+  padding: 2px 7px;
+  font-size: 9px;
+  border-radius: 10px;
 }
 
 @keyframes pulse {
@@ -534,31 +558,138 @@
 }
 
 /* Current Time Box - Matching Admin Dashboard */
+/* Clock container overrides for premium style */
 .content1-box {
-  background: linear-gradient(135deg, #273F4F 0%, #1a2c38 100%);
+  /* Premium gradient to match nav/sidebar/admin clock */
+  background: radial-gradient(circle at top left, #314a5e 0%, #273f4f 40%, #1a2c38 80%, #141c24 100%);
   color: #EFEEEA;
   text-align: center;
   border: none;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Clock title */
 .content1-box h4 {
   color: #EFEEEA;
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-weight: 600;
+  position: relative;
+  z-index: 1;
 }
 
-.content1-box p {
-  font-size: 0.85rem;
-  margin: 0.6rem 0;
-  font-weight: 500;
+/* Animated digital clock (matching admin dashboard) */
+.digital-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+  position: relative;
+  z-index: 1;
 }
 
-.content1-box p:first-of-type {
-  font-size: 1.5rem;
+.clock-digits {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  box-shadow:
+    inset 0 2px 10px rgba(0, 0, 0, 0.3),
+    0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(239, 238, 234, 0.2);
+}
+
+.digit-container {
+  position: relative;
+  width: 50px;
+  height: 70px;
+  perspective: 300px;
+  margin: 0 2px;
+}
+
+.digit {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #FE7743;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: #EFEEEA;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%);
+  border-radius: 8px;
+  text-shadow: none;
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(239, 238, 234, 0.2);
+  transition: all 0.3s ease;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.digit.pulse {
+  animation: digitPulse 1s ease-in-out infinite;
+}
+
+@keyframes digitPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.95;
+  }
+}
+
+.digit-container:hover .digit {
+  transform: scale(1.05);
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.6),
+    0 6px 12px rgba(0, 0, 0, 0.4);
+  text-shadow: none;
+}
+
+.separator {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #EFEEEA;
+  text-shadow: none;
+  animation: blink 1s infinite;
+  margin: 0 0.2rem;
+  line-height: 1;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+.date-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin: 1.1rem 0 0 0;
+  font-weight: 600;
+  color: #ff4d4f; /* Red accent */
+  opacity: 0.98;
+  position: relative;
+  z-index: 1;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 77, 79, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 /* News Center - Matching Admin Dashboard */

@@ -10,7 +10,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #273F4F; /* Gray theme color */
+    /* Match premium sidebar gradient */
+    background: radial-gradient(circle at top left, #314a5e 0%, #273f4f 40%, #1c2b36 80%, #141c24 100%);
     color: #EFEEEA; /* White theme color */
     width: 100%;
     max-width: 100vw;

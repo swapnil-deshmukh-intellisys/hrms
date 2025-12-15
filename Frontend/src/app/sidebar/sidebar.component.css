@@ -1,10 +1,11 @@
 .sidebar {
   width: 240px;
   height: 100vh;
-  padding: 24px 16px;
+  padding: 16px 16px;
   box-sizing: border-box;
-  background: #273F4F; /* Gray theme color */
-  border-right: 1px solid rgba(254, 119, 67, 0.2); /* Orange border */
+  /* Premium gradient background in the same color family */
+  background: radial-gradient(circle at top left, #314a5e 0%, #273f4f 40%, #1c2b36 80%, #141c24 100%);
+  border-right: 1px solid rgba(254, 119, 67, 0.25); /* Slightly stronger orange border */
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
   position: fixed;
   left: 0;
@@ -13,7 +14,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
-  scrollbar-color: rgba(254, 119, 67, 0.3) transparent;
+  scrollbar-color: rgba(254, 119, 67, 0.35) transparent;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -31,10 +32,22 @@
 
 .logo {
   text-align: center;
-  margin-bottom: 40px;
-  padding: 16px 8px;
+  margin-bottom: 10px;
+  padding: 0px 4px;
   position: relative;
   overflow: hidden;
+}
+
+.sidebar-logo-image {
+  width: 140px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+  display: inline-block;
+  padding: 6px 18px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
 .logo::after {
@@ -50,8 +63,8 @@
 .title {
   color: #EFEEEA; /* White theme color */
   font-weight: 600;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
+  font-size: 0.8rem;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
   margin: 0;
   position: relative;
