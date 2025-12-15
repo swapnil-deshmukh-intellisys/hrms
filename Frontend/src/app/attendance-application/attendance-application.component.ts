@@ -8,6 +8,7 @@ import { CalendarOptions } from '@fullcalendar/core/index.js';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-attendance-application',
@@ -108,7 +109,7 @@ export class AttendanceApplicationComponent implements OnInit {
       ...this.attendanceForm.value
     };
 
-    this.http.post('http://localhost:5000/api/attendance-application', applicationData)
+    this.http.post(`${API_CONFIG.baseUrl}/attendance-application`, applicationData)
       .subscribe({
         next: (res) => {
           console.log('Application submitted successfully:', res);
@@ -185,7 +186,7 @@ export class AttendanceApplicationComponent implements OnInit {
   }
   
   submitAttendance(selectedDate: any) {
-    this.http.post('http://localhost:5000/api/attendance-application', { 
+    this.http.post(`${API_CONFIG.baseUrl}/attendance-application`, { 
       employeeCode: this.employeeCode, 
       applicationDate: selectedDate 
     }).subscribe(
@@ -199,7 +200,7 @@ export class AttendanceApplicationComponent implements OnInit {
   }
 
   fetchUpdatedEvents(): void {
-    this.http.get<any[]>('http://localhost:5000/api/attendance-events')  
+    this.http.get<any[]>(`${API_CONFIG.baseUrl}/attendance-events`)  
       .subscribe({
         next: (events: any[]) => {
           console.log('Fetched Updated Events:', events);
