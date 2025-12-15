@@ -7,6 +7,8 @@ import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../services/employee.service';
 import { Observable } from 'rxjs';
+import { API_CONFIG } from '../config/api.config';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-employee',
@@ -26,7 +28,8 @@ export class EmployeeComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private authService: AuthService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private alertService: AlertService
   ) {
     this.employeeForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -75,23 +78,23 @@ export class EmployeeComponent implements OnInit {
 
   submitEmployeeForm(): void {
     if (this.employeeForm.invalid) {
-      alert('⚠️ Please fill in all required fields correctly.');
+      this.alertService.warning('Please fill in all required fields correctly.');
       return;
     }
 
     this.isSubmitting = true;
     const formData = this.prepareFormData();
 
-    this.http.post('http://localhost:5000/api/employees/add', this.employeeForm.value)
+    this.http.post(`${API_CONFIG.baseUrl}/employees/add`, this.employeeForm.value)
       .subscribe({
         next: () => {
-          alert('✅ Employee created:');
+          this.alertService.success('Employee created successfully!');
           this.employeeForm.reset();
           this.isSubmitting = false;
         },
         error: (err: any) => {
           console.error('❌ Error:', err);
-          alert(err.error?.message || 'An error occurred while saving employee data.');
+          this.alertService.error(err.error?.message || 'An error occurred while saving employee data.');
           this.isSubmitting = false;
         }
       });
@@ -128,7 +131,7 @@ export class EmployeeComponent implements OnInit {
     if (!file) return;
 
     if (file.size > 2 * 1024 * 1024) {
-      alert('❌ File size exceeds 2MB');
+      this.alertService.error('File size exceeds 2MB');
       return;
     }
 
@@ -143,5 +146,12 @@ export class EmployeeComponent implements OnInit {
     if (!date) return null;
     const d = new Date(date);
     return isNaN(d.getTime()) ? null : d.toISOString().split('T')[0];
+  }
+
+  cancelForm(): void {
+    if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
+      this.employeeForm.reset();
+      this.router.navigate(['/employee-profile']);
+    }
   }
 }
