@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-right',
@@ -50,7 +51,7 @@ export class RightComponent implements OnInit {
   todoItems: any[] = [];
   newJoinees: any[] = [];
 
-  private readonly API_URL = 'http://localhost:5000/api';
+  private readonly API_URL = API_CONFIG.baseUrl;
 
   constructor(
     private http: HttpClient,
@@ -85,7 +86,7 @@ export class RightComponent implements OnInit {
     return;
   }
 
-  this.http.get<any>(`http://localhost:5000/api/notifications?userId=${userId}`)
+  this.http.get<any>(`${API_CONFIG.baseUrl}/notifications?userId=${userId}`)
     .subscribe({
       next: (res) => {
         this.notifications = res.notifications || [];
@@ -101,7 +102,7 @@ export class RightComponent implements OnInit {
 markNotificationsAsRead() {
   const userId = this.employeeCode;
 
-  this.http.post('http://localhost:5000/api/notifications/mark-as-read', { userId })
+  this.http.post(`${API_CONFIG.baseUrl}/notifications/mark-as-read`, { userId })
     .subscribe({
       next: () => {
         this.notifications.forEach(n => n.isRead = true);
@@ -170,7 +171,7 @@ markNotificationsAsRead() {
       this.imageUrl = emp.image?.startsWith('http')
         ? emp.image
         : emp.image
-          ? `http://localhost:5000/${emp.image}`
+          ? `https://hrms-backend-x5bb.onrender.com/${emp.image}`
           : 'assets/employee (1).png';
 
       // ✅ Load notifications after employeeCode is confirmed

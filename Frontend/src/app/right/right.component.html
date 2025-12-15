@@ -91,18 +91,22 @@
 
   <!-- News Center -->
   <div class="content-box">
-  <h4>News Center</h4>
-  <p *ngIf="newsItems.length === 0">No records to display</p>
-  <ul *ngIf="newsItems.length > 0">
-    <li *ngFor="let news of newsItems">{{ news }}</li>
-  </ul>
-</div>
+    <div class="section-header">
+      <h4>News Center</h4>
+    </div>
+    <p *ngIf="newsItems.length === 0">No records to display</p>
+    <ul *ngIf="newsItems.length > 0">
+      <li *ngFor="let news of newsItems">{{ news }}</li>
+    </ul>
+  </div>
 
   
 
 <!-- Upcoming Birthdays Section -->
 <div class="content-remind">
-  <h4>Upcoming Reminders</h4>
+  <div class="section-header1">
+    <h4>Upcoming Reminders</h4>
+  </div>
 
   <p *ngIf="reminders.length === 0">No reminders</p>
 
@@ -118,51 +122,61 @@
 
   <!-- Feed -->
   <div class="content-feed">
-  <h4>Feed</h4>
-  <p *ngIf="feedItems.length === 0">No new updates</p>
-  <ul *ngIf="feedItems.length > 0">
-  <li *ngFor="let feed of feedItems">
-    {{ feed.text }} — <small>{{ feed.date | date:'medium' }}</small>
-  </li>
-</ul>
-
-</div>
+    <div class="section-header">
+      <h4>Feed</h4>
+    </div>
+    <p *ngIf="feedItems.length === 0">No new updates</p>
+    <ul *ngIf="feedItems.length > 0">
+      <li *ngFor="let feed of feedItems">
+        {{ feed.text }} — <small>{{ feed.date | date:'medium' }}</small>
+      </li>
+    </ul>
+  </div>
 
 
   <!-- Employee Documents -->
   <div class="content-doc">
-  <h4>Employee Documents</h4>
+    <div class="section-header">
+      <h4>Employee Documents</h4>
+    </div>
 
-  <p *ngIf="empDocuments.length === 0">No documents found</p>
+    <p *ngIf="empDocuments.length === 0">No documents found</p>
 
-  <ul *ngIf="empDocuments.length > 0">
-    <li *ngFor="let doc of empDocuments">{{ doc.name }}</li>
-  </ul>
-</div>
+    <ul *ngIf="empDocuments.length > 0">
+      <li *ngFor="let doc of empDocuments">{{ doc.name }}</li>
+    </ul>
+  </div>
 
 
 
   <!-- To Do List -->
   <div class="content-box">
-  <h4>To Do List</h4>
-  <p *ngIf="todoItems.length === 0">No tasks</p>
-  <ul *ngIf="todoItems.length > 0">
-    <li *ngFor="let task of todoItems">
-      <span [class.completed]="task.completed">{{ task.task }}</span>
-    </li>
-  </ul>
-</div>
+    <div class="section-header">
+      <h4>To Do List</h4>
+    </div>
+    <p *ngIf="todoItems.length === 0">No tasks</p>
+    <ul *ngIf="todoItems.length > 0">
+      <li *ngFor="let task of todoItems">
+        <span [class.completed]="task.completed">{{ task.task }}</span>
+      </li>
+    </ul>
+  </div>
 
   <!-- New Joinee -->
   <div class="content-joinee">
-  <h4>New Joinee</h4>
+    <div class="section-header">
+      <h4>New Joinee</h4>
+    </div>
 
-  <p *ngIf="newJoinees.length === 0">No new joinees</p>
+    <p *ngIf="newJoinees.length === 0">No new joinees</p>
 
-  <ul *ngIf="newJoinees.length > 0">
-    <li *ngFor="let joinee of newJoinees">{{ joinee.name }}</li>
-  </ul>
-</div>
+    <ul *ngIf="newJoinees.length > 0">
+      <li *ngFor="let joinee of newJoinees" class="joinee-item">
+        <img [src]="joinee.image || 'assets/employee (1).png'" alt="{{ joinee.name }}" class="joinee-image" />
+        <span>{{ joinee.name }}</span>
+      </li>
+    </ul>
+  </div>
 
 
 
