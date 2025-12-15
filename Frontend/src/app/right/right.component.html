@@ -66,12 +66,13 @@
           alt="{{ emp.name || 'Employee' }}'s photo"
           class="employee-image"
         />
-     <h1>Welcome, {{ username || 'Shraddha' }}</h1>
+        <h1>Welcome, {{ username || 'Shraddha' }}</h1>
       </div>
     
       <div class="welcome-message">
-  <p>{{ welcomeMessage || 'Hope you have a great day at work!' }}</p>
-</div>
+        <p *ngIf="welcomeMessage">{{ welcomeMessage }}</p>
+        <p>Hope you have a great day at work!</p>
+      </div>
     </div>
     <div class="officelogo">
       <img src="assets/logo (2).png" alt="Office Logo" />
