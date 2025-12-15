@@ -141,26 +141,82 @@ a.active {
   font-weight: 600;
 }
 
-a.active mat-icon {
-  color: #FE7743 !important; /* Orange theme color for icon when active */
-  transform: scale(1.1);
-}
-
 a mat-icon {
   margin-right: 12px;
   font-size: 20px;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
+  border-radius: 10px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 a:hover mat-icon {
   transform: scale(1.1);
-  color: #FE7743; /* Orange theme color on hover */
 }
+
+/* Colorful icon styles per section (icon glyph + subtle background tint) */
+.nav-dashboard mat-icon {
+  color: #4a90e2;
+  background: rgba(74, 144, 226, 0.15);
+}
+
+.nav-employees mat-icon {
+  color: #56ab2f;
+  background: rgba(86, 171, 47, 0.15);
+}
+
+.nav-home mat-icon {
+  color: #ff9a9e;
+  background: rgba(255, 154, 158, 0.18);
+}
+
+.nav-profile mat-icon {
+  color: #a18cd1;
+  background: rgba(161, 140, 209, 0.18);
+}
+
+.nav-attendance mat-icon {
+  color: #f7971e;
+  background: rgba(247, 151, 30, 0.18);
+}
+
+.nav-leave mat-icon {
+  color: #11998e;
+  background: rgba(17, 153, 142, 0.18);
+}
+
+.nav-payslip mat-icon,
+.nav-payroll mat-icon {
+  color: #f953c6;
+  background: rgba(249, 83, 198, 0.18);
+}
+
+.nav-exit mat-icon {
+  color: #ff512f;
+  background: rgba(255, 81, 47, 0.18);
+}
+
+.nav-attendance-approval mat-icon,
+.nav-leave-approval mat-icon {
+  color: #36d1dc;
+  background: rgba(54, 209, 220, 0.18);
+}
+
+.nav-resignation-approval mat-icon {
+  color: #f46b45;
+  background: rgba(244, 107, 69, 0.18);
+}
+
+.nav-admin-profile mat-icon {
+  color: #654ea3;
+  background: rgba(101, 78, 163, 0.18);
+}
+
 
 /* Dropdown Menu */
 .dropdown {

@@ -6,82 +6,82 @@
     <ul>
 
       <li *ngIf="role === 'admin'">
-        <a [routerLink]="['/admin-dashboard']" routerLinkActive="active">
+        <a class="nav-link nav-dashboard" [routerLink]="['/admin-dashboard']" routerLinkActive="active">
           <mat-icon>admin_panel_settings</mat-icon> Admin Dashboard
         </a>
       </li>
 
       <li *ngIf="role === 'admin'">
-        <a [routerLink]="['/employee-profile']" routerLinkActive="active">
+        <a class="nav-link nav-employees" [routerLink]="['/employee-profile']" routerLinkActive="active">
           <mat-icon>people</mat-icon> Employee
         </a>
       </li>
 
       <!-- Home Section -->
       <li *ngIf="role === 'employee'">
-        <a [routerLink]="['/right']" routerLinkActive="active">
+        <a class="nav-link nav-home" [routerLink]="['/right']" routerLinkActive="active">
           <mat-icon>home</mat-icon> Home
         </a>
       </li>
   
       <!-- Profile Section -->
       <li *ngIf="role === 'employee'">
-        <a [routerLink]="['/profile']" routerLinkActive="active">
+        <a class="nav-link nav-profile" [routerLink]="['/profile']" routerLinkActive="active">
           <mat-icon>person</mat-icon> Profile
         </a>
       </li>
   
       <!-- Other Sections -->
       <li *ngIf="role === 'employee'">
-        <a [routerLink]="['/shedule']" routerLinkActive="active">
+        <a class="nav-link nav-attendance" [routerLink]="['/shedule']" routerLinkActive="active">
           <mat-icon>event</mat-icon> Time & Attendance
         </a>
       </li>
 
       <li *ngIf="role === 'employee'">
-        <a [routerLink]="['/leaves']" routerLinkActive="active">
+        <a class="nav-link nav-leave" [routerLink]="['/leaves']" routerLinkActive="active">
           <mat-icon>event_available</mat-icon> Leave
         </a>
       </li>
       
       <li *ngIf="role === 'employee'">
-        <a [routerLink]="['/userpay']" routerLinkActive="active">
+        <a class="nav-link nav-payslip" [routerLink]="['/userpay']" routerLinkActive="active">
           <mat-icon>payments</mat-icon> Payslip
         </a>
       </li>
 
       <li *ngIf="role === 'admin'">
-        <a [routerLink]="['/payroll']" routerLinkActive="active">
+        <a class="nav-link nav-payroll" [routerLink]="['/payroll']" routerLinkActive="active">
           <mat-icon>payments</mat-icon> Payslip
         </a>
       </li>
      
       <li *ngIf="role === 'employee'">
-        <a [routerLink]="['/resignation']" routerLinkActive="active">
+        <a class="nav-link nav-exit" [routerLink]="['/resignation']" routerLinkActive="active">
           <mat-icon>exit_to_app</mat-icon> Apply Exit
         </a>
       </li>
 
       <li *ngIf="role === 'admin'">
-        <a [routerLink]="['/attendance-approval']" routerLinkActive="active">
+        <a class="nav-link nav-attendance-approval" [routerLink]="['/attendance-approval']" routerLinkActive="active">
           <mat-icon>assessment</mat-icon> Attendance Approval
         </a>
       </li>
 
       <li *ngIf="role === 'admin'">
-        <a [routerLink]="['/leaves-approval']" routerLinkActive="active">
+        <a class="nav-link nav-leave-approval" [routerLink]="['/leaves-approval']" routerLinkActive="active">
           <mat-icon>check_circle</mat-icon> Leave Approval
         </a>
       </li>
 
       <li *ngIf="role === 'admin'">
-        <a [routerLink]="['/resignation-approval']" routerLinkActive="active">
+        <a class="nav-link nav-resignation-approval" [routerLink]="['/resignation-approval']" routerLinkActive="active">
           <mat-icon>logout</mat-icon> Resignation Approval
         </a>
       </li>
 
       <li *ngIf="role === 'admin'">
-        <a [routerLink]="['/admin-profile']" routerLinkActive="active">
+        <a class="nav-link nav-admin-profile" [routerLink]="['/admin-profile']" routerLinkActive="active">
           <mat-icon>account_circle</mat-icon> Admin Profile
         </a>
       </li>
