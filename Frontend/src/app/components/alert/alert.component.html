@@ -1,0 +1,13 @@
+<div class="alert-container">
+  <div
+    *ngFor="let alert of alerts"
+    [class]="'alert alert-' + alert.type"
+  >
+    <mat-icon class="alert-icon">{{ getIcon(alert.type) }}</mat-icon>
+    <span class="alert-message">{{ alert.message }}</span>
+    <button class="alert-close" (click)="removeAlert(alert.id)" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
