@@ -3,7 +3,7 @@
 <div class="top-nav">
   <!-- Hamburger Button -->
   <button class="hamburger-btn" (click)="toggleMenu()">
-    <i class="fa fa-bars"></i>
+    <mat-icon>menu</mat-icon>
   </button>
 
   <!-- HRMThread Title -->
@@ -20,7 +20,7 @@
     </div>
     <div class="user-info1">
       <div class="notification-container">
-        <i class="fa fa-bell" (click)="toggleNotifications()"></i>
+        <mat-icon (click)="toggleNotifications()" class="notification-icon">notifications</mat-icon>
         <span *ngIf="unreadNotificationsCount > 0" class="notification-badge">
           {{ unreadNotificationsCount }}
         </span>
@@ -29,7 +29,7 @@
         <div *ngIf="showNotifications" class="notification-popup">
           <div class="notification-header">
             <h3>Notifications</h3>
-            <button class="close-btn" (click)="showNotifications = false">&times;</button>
+            <button class="close-btn" (click)="showNotifications = false"><mat-icon>close</mat-icon></button>
           </div>
           <div class="notification-list">
             <div *ngFor="let notification of notifications" 
@@ -58,7 +58,7 @@
 
     <li>
       <a (click)="toggleDropdown('home')">
-        <span>🏠</span> Home
+        <mat-icon>home</mat-icon> Home
         <span class="arrow" [ngClass]="{ open: isDropdownOpen.home }">&#9662;</span>
       </a>
       <ul *ngIf="isDropdownOpen.home" class="dropdown">
@@ -68,7 +68,7 @@
 
     <li>
       <a (click)="toggleDropdown('profile')">
-        <span>👤</span> Profile
+        <mat-icon>person</mat-icon> Profile
         <span class="arrow" [ngClass]="{ open: isDropdownOpen.profile }">&#9662;</span>
       </a>
       <ul *ngIf="isDropdownOpen.profile" class="dropdown">
@@ -76,21 +76,21 @@
       </ul>
     </li>
 
-    <li><a [routerLink]="['/shedule']"  (click)="navigateAndClose()"><span>🗓️</span> Time & Attendance</a></li>
-    <li><a [routerLink]="['/leave']"  (click)="navigateAndClose()"><span>✅</span> Leave</a></li>
-    <li><a [routerLink]="['/userpay']"  (click)="navigateAndClose()"><span>💰</span> Payslip</a></li>
-    <li><a [routerLink]="['/resignation']"  (click)="navigateAndClose()"><span>🚪</span> Apply Exit</a></li>
-     <li><a [routerLink]="['/login']"  (click)="navigateAndClose()"><span>📊</span> Logout</a></li>
+    <li><a [routerLink]="['/shedule']"  (click)="navigateAndClose()"><mat-icon>event</mat-icon> Time & Attendance</a></li>
+    <li><a [routerLink]="['/leave']"  (click)="navigateAndClose()"><mat-icon>event_available</mat-icon> Leave</a></li>
+    <li><a [routerLink]="['/userpay']"  (click)="navigateAndClose()"><mat-icon>payments</mat-icon> Payslip</a></li>
+    <li><a [routerLink]="['/resignation']"  (click)="navigateAndClose()"><mat-icon>exit_to_app</mat-icon> Apply Exit</a></li>
+     <li><a [routerLink]="['/login']"  (click)="navigateAndClose()"><mat-icon>logout</mat-icon> Logout</a></li>
   </ul>
 
   <!-- ✅ ADMIN MENU -->
   <ul *ngIf="role === 'admin'">
-    <li><a [routerLink]="['/admin-dashboard']"  (click)="navigateAndClose()"><span>🕵️‍♂️</span> Admin Dashboard</a></li>
-    <li><a [routerLink]="['/employee-profile']"  (click)="navigateAndClose()"><span>👤</span> Employee</a></li>
-    <li><a [routerLink]="['/leaves-approval']"  (click)="navigateAndClose()"><span>✅</span> Leave Approval</a></li>
-    <li><a [routerLink]="['/attendance-approval']"  (click)="navigateAndClose()"><span>📊</span> Attendance Approval</a></li>
-    <li><a [routerLink]="['/resignation-approval']"  (click)="navigateAndClose()"><span>🚪</span> Resignation Approval</a></li>
-    <li><a [routerLink]="['/admin-profile']"  (click)="navigateAndClose()"><span>👤</span> Admin Profile</a></li>
-    <li><a [routerLink]="['/login']"  (click)="navigateAndClose()"><span>📊</span> Logout</a></li>
+    <li><a [routerLink]="['/admin-dashboard']"  (click)="navigateAndClose()"><mat-icon>admin_panel_settings</mat-icon> Admin Dashboard</a></li>
+    <li><a [routerLink]="['/employee-profile']"  (click)="navigateAndClose()"><mat-icon>people</mat-icon> Employee</a></li>
+    <li><a [routerLink]="['/leaves-approval']"  (click)="navigateAndClose()"><mat-icon>check_circle</mat-icon> Leave Approval</a></li>
+    <li><a [routerLink]="['/attendance-approval']"  (click)="navigateAndClose()"><mat-icon>assessment</mat-icon> Attendance Approval</a></li>
+    <li><a [routerLink]="['/resignation-approval']"  (click)="navigateAndClose()"><mat-icon>logout</mat-icon> Resignation Approval</a></li>
+    <li><a [routerLink]="['/admin-profile']"  (click)="navigateAndClose()"><mat-icon>account_circle</mat-icon> Admin Profile</a></li>
+    <li><a [routerLink]="['/login']"  (click)="navigateAndClose()"><mat-icon>logout</mat-icon> Logout</a></li>
   </ul>
 </div>
