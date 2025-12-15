@@ -141,7 +141,6 @@ export class AdminDashboardComponent implements OnInit {
   ];
 
   private readonly API_URL = `${API_CONFIG.baseUrl}/employees`;
-  private readonly STORAGE_KEY = 'admin_dashboard_data';
 
   constructor(
     private http: HttpClient,
@@ -157,30 +156,6 @@ export class AdminDashboardComponent implements OnInit {
     this.fetchEmployees();
     this.getUpcomingBirthdays();
     this.loadDashboardData();
-    this.loadLocalData();
-  }
-
-  private loadLocalData(): void {
-    const savedData = localStorage.getItem(this.STORAGE_KEY);
-    if (savedData) {
-      const data = JSON.parse(savedData);
-      this.feedItems = data.feedItems?.map((item: any) => ({
-        text: item.text,
-        date: new Date(item.date)
-      })) || [];
-      this.reminders = data.reminders?.map((reminder: any) => ({
-        ...reminder,
-        date: new Date(reminder.date)
-      })) || [];
-    }
-  }
-
-  private saveLocalData(): void {
-    const data = {
-      feedItems: this.feedItems,
-      reminders: this.reminders
-    };
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
   }
 
   // Notification methods removed - now handled by AdminNavbarComponent
@@ -194,7 +169,8 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   private loadDashboardData(): void {
-    this.http.get<any>(`${API_CONFIG.baseUrl}/admin-dashboard/public`).subscribe({
+    const headers = this.createAuthHeaders();
+    this.http.get<any>(`${API_CONFIG.baseUrl}/admin-dashboard/public`, { headers }).subscribe({
       next: (data) => {
         this.welcomeMessage = data?.welcomeMessage || '';
         this.newsItems = data?.newsItems || [];
@@ -202,14 +178,35 @@ export class AdminDashboardComponent implements OnInit {
         this.todoItems = data?.todoItems || [];
         this.newJoinees = data?.newJoinees || [];
         this.documents = data?.documents || [];
-        this.feedItems = data?.feedItems || [];
-        this.reminders = data?.reminders || [];
+        // Ensure feedItems have proper date format
+        this.feedItems = (data?.feedItems || []).map((item: any) => ({
+          text: item.text || item,
+          date: item.date ? new Date(item.date) : new Date()
+        }));
+        // Ensure reminders have proper date format
+        this.reminders = (data?.reminders || []).map((reminder: any) => ({
+          title: reminder.title || '',
+          date: reminder.date || new Date().toISOString().split('T')[0],
+          type: reminder.type || 'General',
+          notes: reminder.notes || ''
+        }));
       },
-      error: (err) => console.error('Error fetching dashboard data:', err)
+      error: (err) => {
+        console.error('Error fetching dashboard data:', err);
+        // Initialize empty arrays if API fails
+        this.newsItems = [];
+        this.empDocuments = [];
+        this.todoItems = [];
+        this.newJoinees = [];
+        this.documents = [];
+        this.feedItems = [];
+        this.reminders = [];
+      }
     });
   }
 
   saveDashboardData(): void {
+    const headers = this.createAuthHeaders();
     const data = {
       welcomeMessage: this.welcomeMessage,
       newsItems: this.newsItems,
@@ -217,13 +214,31 @@ export class AdminDashboardComponent implements OnInit {
       todoItems: this.todoItems,
       newJoinees: this.newJoinees,
       documents: this.documents,
-      feedItems: this.feedItems,
-      reminders: this.reminders
+      feedItems: this.feedItems.map(item => ({
+        text: item.text,
+        date: item.date instanceof Date ? item.date : new Date(item.date)
+      })),
+      reminders: this.reminders.map(reminder => ({
+        title: reminder.title,
+        date: reminder.date,
+        type: reminder.type,
+        notes: reminder.notes
+      }))
     };
 
-    this.http.put<any>(`${API_CONFIG.baseUrl}/admin-dashboard`, data).subscribe({
-      next: () => console.log('Dashboard data saved'),
-      error: (err) => console.error('Error saving dashboard:', err)
+    this.http.put<any>(`${API_CONFIG.baseUrl}/admin-dashboard`, data, { headers }).subscribe({
+      next: (response) => {
+        console.log('Dashboard data saved successfully', response);
+        // Update local arrays with saved data to ensure sync
+        if (response?.dashboard) {
+          this.feedItems = response.dashboard.feedItems || this.feedItems;
+          this.reminders = response.dashboard.reminders || this.reminders;
+        }
+      },
+      error: (err) => {
+        console.error('Error saving dashboard:', err);
+        alert('Failed to save changes. Please try again.');
+      }
     });
   }
 
@@ -414,11 +429,11 @@ export class AdminDashboardComponent implements OnInit {
         break;
       case 'reminders':
         this.editingReminders = !this.editingReminders;
-        if (!this.editingReminders) this.saveLocalData();
+        if (!this.editingReminders) this.saveDashboardData();
         break;
       case 'feed':
         this.editingFeed = !this.editingFeed;
-        if (!this.editingFeed) this.saveLocalData();
+        if (!this.editingFeed) this.saveDashboardData();
         break;
       case 'empDocuments':
         this.editingEmpDocuments = !this.editingEmpDocuments;
@@ -485,6 +500,13 @@ export class AdminDashboardComponent implements OnInit {
     this.saveDashboardData();
   }
 
+  onReminderChange(): void {
+    // Auto-save when reminder fields are modified
+    if (this.editingReminders) {
+      this.saveDashboardData();
+    }
+  }
+
   // Feed methods
   addFeedItem(): void {
   if (this.feedText.trim()) {
@@ -527,11 +549,19 @@ export class AdminDashboardComponent implements OnInit {
   // Todo methods
   addTodoItem(): void {
     this.todoItems.unshift({ task: 'New task', completed: false });
+    this.saveDashboardData();
   }
 
   removeTodoItem(index: number): void {
     this.todoItems.splice(index, 1);
     this.saveDashboardData();
+  }
+
+  onTodoChange(): void {
+    // Auto-save when todo items are modified
+    if (this.editingTodo) {
+      this.saveDashboardData();
+    }
   }
 
   // Joinee methods
@@ -541,6 +571,7 @@ export class AdminDashboardComponent implements OnInit {
       joinDate: new Date().toISOString().split('T')[0], 
       imageUrl: 'assets/employee (1).png' 
     });
+    this.saveDashboardData();
   }
 
   removeJoinee(index: number): void {
@@ -554,8 +585,16 @@ export class AdminDashboardComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.newJoinees[index].imageUrl = e.target.result;
+        this.saveDashboardData();
       };
       reader.readAsDataURL(file);
+    }
+  }
+
+  onJoineeChange(): void {
+    // Auto-save when joinee fields are modified
+    if (this.editingJoinee) {
+      this.saveDashboardData();
     }
   }
 

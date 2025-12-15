@@ -12,6 +12,9 @@
   height: 100vh; /* Full height */
   width: 100%;
   position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Top navigation bar */
@@ -39,13 +42,18 @@
   background-color: transparent; /* No background - let pages control their own */
   min-height: 100vh; /* Full height */
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* Add spacing only when sidebar is present */
 .page-layout.with-sidebar .main-content {
   margin-left: 240px; /* Account for fixed sidebar width */
   width: calc(100% - 240px); /* Ensure content takes remaining width */
-  /* padding: 20px; Padding for content */
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 

@@ -18,6 +18,8 @@ export class LoginPageComponent {
   errorMessage: string = '';
   successMessage: string = '';
   isLoading: boolean = false;
+  submitted: boolean = false;
+  loginFailed: boolean = false;
 
   username: string = 'Rani';
   password: string = 'Rani123';
@@ -28,12 +30,20 @@ export class LoginPageComponent {
   ) {}
   
   async login(loginForm: NgForm) {
+    // Prevent multiple submissions
+    if (this.isLoading) {
+      return;
+    }
+
+    this.submitted = true;
+    this.loginFailed = false;
+    
     if (!loginForm.valid) {
-      this.alertService.error('Please enter a valid username/email and password.');
       return;
     }
   
     const { username, password } = loginForm.value;
+    this.isLoading = true;
   
     try {
       const response = await fetch(`${API_CONFIG.baseUrl}/auth/login`, {
@@ -45,6 +55,7 @@ export class LoginPageComponent {
       const data = await response.json();
   
       if (!response.ok || !data.success) {
+        this.loginFailed = true;
         throw new Error(data.message || 'Login failed');
       }
   
@@ -65,7 +76,10 @@ export class LoginPageComponent {
       }
 
     } catch (error: unknown) {
+      this.loginFailed = true;
       this.alertService.error(error instanceof Error ? error.message : 'An unexpected error occurred.');
+    } finally {
+      this.isLoading = false;
     }
   }
 }

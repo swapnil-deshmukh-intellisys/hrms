@@ -22,11 +22,16 @@ const NewJoineeSchema = new mongoose.Schema({
   imageUrl: String
 });
 
+const DocumentSchema = new mongoose.Schema({
+  name: String
+});
+
 const AdminDashboardSchema = new mongoose.Schema({
   welcomeMessage: String,
   newsItems: [String],
   reminders: [ReminderSchema],
   feedItems: [{ text: String, date: Date }],
+  documents: [DocumentSchema],
   empDocuments: [EmpDocumentSchema],
   todoItems: [TodoItemSchema],
   newJoinees: [NewJoineeSchema]

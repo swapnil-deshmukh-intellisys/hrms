@@ -16,63 +16,65 @@
           (ngSubmit)="login(loginForm)"
           novalidate
         >
-          <!-- Username/Email Input -->
-          <div class="input-group">
-            <label for="username">Username/Email</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              ngModel
-              required
-              minlength="3"
-              maxlength="50"
-              placeholder="Enter your username or email"
-              #username="ngModel"
-            />
-            <!-- Username Validation Errors -->
-            <div class="error" *ngIf="username.invalid && (username.dirty || username.touched)">
-              <!-- <small *ngIf="username.errors?.['required']">Username is required.</small>
-              <small *ngIf="username.errors?.['minlength']">
-                Username must be at least 3 characters.
-              </small>
-              <small *ngIf="username.errors?.['maxlength']">
-                Username must not exceed 15 characters.
-              </small>
-              <small *ngIf="username.errors?.['pattern']">
-                Username can only contain letters and numbers.
-              </small> -->
+          <!-- Common Login Error Message -->
+          <div class="error" *ngIf="submitted && loginFailed && !username.errors?.['required'] && !password.errors?.['required']">
+            <small>Username or password is incorrect.</small>
+          </div>
+
+          <!-- Input Fields Section with Loading Overlay -->
+          <div class="inputs-section" [class.loading-active]="isLoading">
+            <!-- Loading Overlay for Inputs Only -->
+            <div class="loading-overlay" *ngIf="isLoading">
+              <div class="spinner"></div>
+            </div>
+
+            <!-- Username/Email Input -->
+            <div class="input-group">
+              <label for="username">Username/Email</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                ngModel
+                required
+                minlength="3"
+                maxlength="50"
+                placeholder="Enter your username or email"
+                [disabled]="isLoading"
+                #username="ngModel"
+              />
+              <!-- Username Validation Errors -->
+              <div class="error" *ngIf="submitted">
+                <small *ngIf="username.errors?.['required']">Username is required.</small>
+              </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                ngModel
+                required
+                minlength="6"
+                [disabled]="isLoading"
+                placeholder="Enter your password"
+                #password="ngModel"
+              />
+              <!-- Password Validation Errors -->
+              <div class="error" *ngIf="submitted">
+                <small *ngIf="password.errors?.['required']">Password is required.</small>
+              </div>
             </div>
           </div>
 
-          <!-- Password Input -->
-          <div class="input-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              ngModel
-              required
-              minlength="6"
-             
-              placeholder="Enter your password"
-              #password="ngModel"
-            />
-            <!-- Password Validation Errors -->
-            <div class="error" *ngIf="password.invalid && (password.dirty || password.touched)">
-              <small *ngIf="password.errors?.['required']">Password is required.</small>
-              <small *ngIf="password.errors?.['minlength']">
-                Password must be at least 6 characters.
-              </small>
-              <small *ngIf="password.errors?.['pattern']">
-                Password must include at least one uppercase letter, one lowercase letter, and one number.
-              </small>
-            </div>
-          </div>
-
-          <a [routerLink]="['/reset-password']" class="forgot-password">Forgot password?</a>
-          <button type="submit"> Login</button>
+          <a [routerLink]="['/reset-password']" class="forgot-password" [class.disabled]="isLoading">Forgot password?</a>
+          <button type="submit" [disabled]="isLoading" [class.loading]="isLoading">
+            <span *ngIf="!isLoading">Login</span>
+            <span *ngIf="isLoading">Please wait...</span>
+          </button>
 
           
         </form>
