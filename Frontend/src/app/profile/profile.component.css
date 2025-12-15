@@ -1,275 +1,353 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
-
-/* General Body Styling */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #333;
-    background-color: #f9f9f9;
-    line-height: 1.6;
+/* Component Host */
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Navbar Styles */
+/* Navbar Styles - Matching Admin Dashboard */
 .navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: black;
-    color: white;
-    height: 50px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #273F4F 0%, #1a2c38 100%);
+  color: #EFEEEA;
+  height: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #FE7743;
 }
 
 .navbar .logo {
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-/* Employee Container */
+/* Employee Container - Matching Admin Dashboard */
 .employee-container {
-   
-    padding: 20px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 20px auto;
-    max-width: 900px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 2rem;
+  background: white;
+  border: 1px solid rgba(239, 238, 234, 0.8);
+  border-radius: 20px;
+  margin: 1.5rem auto;
+  max-width: 1200px;
+  box-shadow: 0 8px 32px rgba(39, 63, 79, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.employee-container:hover {
+  box-shadow: 0 12px 40px rgba(39, 63, 79, 0.12);
 }
 
 /* Employee Header */
 .employee-header {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
-/* Employee Image */
+/* Employee Image - Matching Admin Dashboard */
 .employee-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .employee-image img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #FE7743;
+  box-shadow: 0 0 0 3px rgba(254, 119, 67, 0.2);
 }
 
 /* Employee Details */
 .employee-details {
-    flex: 1;
+  flex: 1;
 }
-.headline
-{
-    align-items: center;
-    text-align: center;
+
+.headline {
+  align-items: center;
+  text-align: center;
 }
+
 .headline span {
-    font-size: 24px;
-    font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #273F4F;
 }
 
 .flex-row {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 15px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 15px;
 }
 
 .flex-item {
-    flex: 1 1 200px;
+  flex: 1 1 200px;
 }
 
 .detail label {
-    font-weight: bold;
-    color: #555;
+  font-weight: 600;
+  color: #273F4F;
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 0.3rem;
 }
 
 .detail span {
-    margin-left: 5px;
-    color: #666;
+  margin-left: 5px;
+  color: #5a6d7e;
+  font-size: 0.9rem;
 }
 
 /* Employee Buttons */
 .employee-m {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    background-color: white;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 40px !important; /* Increased for better spacing */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 40px !important;
 }
 
-
 .empbutton {
-    margin-right: 20px;
-    gap:20px;
+  margin-right: 20px;
+  gap: 20px;
 }
 
 .empbutton .letter {
-    margin-right: 0; /* Ensures the second button does not have additional space on the right */
+  margin-right: 0;
 }
 
 button {
-    margin-left: 19px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
+  margin-left: 19px;
+  padding: 0.5rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #273F4F 0%, #1a2c38 100%);
+  color: #EFEEEA;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(39, 63, 79, 0.2);
 }
 
 button:hover {
-    background-color: #27282a;
+  background: linear-gradient(135deg, #1a2c38 0%, #0f1c24 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(39, 63, 79, 0.3);
 }
 
-/* Cards */
+/* Cards - Matching Admin Dashboard */
 .card-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 20px;
-    overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .card {
-    width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, white, white);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    overflow: hidden;
-    margin-bottom: 20px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(39, 63, 79, 0.08);
+  background: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  margin-bottom: 0;
+  border: 1px solid rgba(239, 238, 234, 0.8);
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(135deg, white, rgb(238, 238, 238));
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(39, 63, 79, 0.12);
 }
 
 .card-header {
-    background-color: darkorange;
-    font-size: 1.2rem;
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center;
-    border-bottom: 2px solid #ddd;
+  background: linear-gradient(135deg, #273F4F 0%, #1a2c38 100%);
+  font-size: 0.9rem;
+  color: #EFEEEA;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  border-bottom: 3px solid #FE7743;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(188, 198, 204, 0.2), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .card-body {
-    padding: 10px;
-    color: black;
+  padding: 1.5rem;
+  color: #273F4F;
 }
 
 .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
-    color: black;
-    font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  color: #273F4F;
+  font-weight: 600;
 }
 
 .card-text {
-    font-size: 1rem;
-    margin-bottom: 8px;
-    color: black;
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+  color: #5a6d7e;
+  line-height: 1.6;
 }
 
 .card-text strong {
-    color: black;
+  color: #273F4F;
+  font-weight: 600;
 }
 
-/* Additional Section Styling */
+/* Additional Section Styling - Matching Admin Dashboard */
+.container2 {
+  padding: 0 2rem;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
 .container2 p {
-    font-weight: bold;
-    font-size: 1.1rem;
-    height: 50px;
-    width: 100%;
-    background-color: whitesmoke;
-    padding: 10px;
-    color: rgb(12, 12, 11);
+  font-weight: 600;
+  font-size: 0.9rem;
+  height: auto;
+  min-height: 50px;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(254, 119, 67, 0.1) 0%, rgba(254, 119, 67, 0.05) 100%);
+  padding: 1rem 1.5rem;
+  color: #273F4F;
+  border-left: 3px solid #FE7743;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  margin: 0;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .employee-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin-top: 10px;
-    }
+  .employee-container {
+    padding: 1rem;
+    margin: 1rem auto;
+    border-radius: 16px;
+  }
 
-    .headline span {
-        margin-left: 2%;
-    }
+  .employee-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+  }
 
-    .employee-image img {
-        width: 100px;
-        height: 100px;
-    }
+  .headline span {
+    font-size: 1.5rem;
+    margin-left: 0;
+  }
 
-    .card-container {
-        flex-direction: column;
-        align-items: center;
-    }
+  .employee-image img {
+    width: 100px;
+    height: 100px;
+  }
 
-    .card {
-        width: 90%;
-    }
+  .card-container {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
 
-    .navbar {
-        flex-direction: column;
-        text-align: center;
-    }
+  .card {
+    width: 100%;
+  }
+
+  .container2 {
+    padding: 0 1rem;
+  }
+
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+    padding: 10px;
+  }
 }
 
 @media (max-width: 480px) {
-    .employee-header {
-        margin-top: 5px;
-    }
+  .employee-container {
+    padding: 0.8rem;
+    margin: 0.8rem auto;
+  }
 
-    .employee-image img {
-        width: 80px;
-        height: 80px;
-    }
+  .employee-header {
+    margin-top: 5px;
+  }
 
-    .card {
-        width: 100%;
-        margin-bottom: 10px;
-    }
+  .employee-image img {
+    width: 80px;
+    height: 80px;
+  }
 
-    .card-body {
-        padding: 8px;
-    }
+  .headline span {
+    font-size: 1.3rem;
+  }
 
-    .card-title {
-        font-size: 1rem;
-    }
+  .card {
+    width: 100%;
+    margin-bottom: 0;
+  }
 
-    .card-text {
-        font-size: 0.9rem;
-    }
+  .card-body {
+    padding: 1rem;
+  }
 
-    .navbar .logo {
-        font-size: 1.1rem;
-    }
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+  }
+
+  .container2 p {
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .navbar .logo {
+    font-size: 1rem;
+  }
 }

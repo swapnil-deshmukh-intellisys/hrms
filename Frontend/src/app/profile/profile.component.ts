@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { API_CONFIG } from '../config/api.config';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,7 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.http.get<any>(`http://localhost:5000/api/employees/employee/code/${employeeCode}`)
+    this.http.get<any>(`${API_CONFIG.baseUrl}/employees/employee/code/${employeeCode}`)
       .subscribe({
         next: (response) => {
           this.profileData = response;
