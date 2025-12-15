@@ -1,7 +1,7 @@
 const AdminDashboard = require('../models/AdminDashboard');
 const Notification = require('../models/Notification');
 
-// Get dashboard data
+// Get dashboard data (admin only)
 exports.getDashboard = async (req, res) => {
   try {
     let dashboard = await AdminDashboard.findOne();
@@ -12,47 +12,6 @@ exports.getDashboard = async (req, res) => {
     res.json(dashboard);
   } catch (err) {
     res.status(500).json({ error: err.message });
-  }
-};
-
-// Update dashboard data
-exports.updateDashboard = async (req, res) => {
-  try {
-    const update = req.body;
-    console.log("Received payload:", JSON.stringify(update, null, 2));  // FULL LOG
-
-    let dashboard = await AdminDashboard.findOne();
-
-    if (!dashboard) {
-      dashboard = new AdminDashboard(update);
-    } else {
-      Object.assign(dashboard, update);
-    }
-
-    await dashboard.save();
-    res.json(dashboard);
-  } catch (err) {
-    console.error("🔥 Error while updating dashboard:", err);
-    res.status(500).json({ error: err.message });
-  }
-};
-
-exports.updateDashboard = async (req, res) => {
-  try {
-    let dashboard = await AdminDashboard.findOne();
-
-    if (!dashboard) {
-      dashboard = new AdminDashboard(req.body);
-    } else {
-      Object.assign(dashboard, req.body);
-    }
-
-    await dashboard.save();
-
-    res.json({ success: true, dashboard });
-  } catch (err) {
-    console.error("Error updating dashboard:", err);
-    res.status(500).json({ success: false, message: 'Failed to update dashboard', error: err.message });
   }
 };
 
@@ -70,6 +29,7 @@ exports.getDashboardPublic = async (req, res) => {
   }
 };
 
+// Update dashboard data (with notifications)
 exports.updateDashboard = async (req, res) => {
   try {
     const update = req.body;
