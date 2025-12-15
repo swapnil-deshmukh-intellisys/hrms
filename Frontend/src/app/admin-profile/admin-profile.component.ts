@@ -15,7 +15,6 @@ export class AdminProfileComponent implements OnInit {
   editMode: boolean[] = [];
   showPassword: boolean[] = [];
   profilePhotos: (string | null)[] = [];
-  defaultPhoto = 'assets/default-profile.png';
   adminNames: string[] = ['Rutik Bhosale', 'Mahesh Jadhav', 'Swapnil Deshmukh'];
 
   constructor(private fb: FormBuilder) {}

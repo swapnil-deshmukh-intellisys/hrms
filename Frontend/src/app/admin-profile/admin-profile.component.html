@@ -8,10 +8,15 @@
     <div class="admin-header">
     <label class="photo-upload-label" *ngIf="editMode[i]">
    <div class="profile-photo-wrapper">
-    <img [src]="profilePhotos[i] || defaultPhoto" 
+    <img *ngIf="profilePhotos[i]" 
+         [src]="profilePhotos[i]" 
          alt="Profile Photo" 
          class="profile-photo" 
-         [class.editable]="editMode[i]" />
+         [class.editable]="editMode[i]"
+         (error)="profilePhotos[i] = null" />
+    <div *ngIf="!profilePhotos[i]" class="profile-icon-fallback">
+      <span class="material-icons">person</span>
+    </div>
     <div class="photo-overlay">Change Photo</div>
      </div>
     <input type="file" 
@@ -21,9 +26,14 @@
   </label>
 
 <div class="profile-photo-wrapper" *ngIf="!editMode[i]">
-  <img [src]="profilePhotos[i] || defaultPhoto" 
+  <img *ngIf="profilePhotos[i]" 
+       [src]="profilePhotos[i]" 
        alt="Profile Photo" 
-       class="profile-photo" />
+       class="profile-photo"
+       (error)="profilePhotos[i] = null" />
+  <div *ngIf="!profilePhotos[i]" class="profile-icon-fallback">
+    <span class="material-icons">person</span>
+  </div>
 </div>
 
       

@@ -1,80 +1,135 @@
-/* Base Styles */
+/* Admin Profile Component - Premium Redesign */
+
+/* Base Container */
 .profile-container {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  font-family: 'Poppins', sans-serif;
-  background-color: #f8f8f8;
-  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, 'Poppins', sans-serif;
+  min-height: 100vh;
+  background: transparent;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
+/* Page Title - Premium */
 .title {
   text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 2.5rem;
-  color: #333;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #273F4F;
+  text-transform: none;
+  letter-spacing: -0.3px;
   position: relative;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.8rem;
+  line-height: 1.2;
 }
 
-.title::after {
+.title::before {
   content: '';
   position: absolute;
-  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+  bottom: 0;
   width: 80px;
-  height: 4px;
-  background: #FF6B00;
+  height: 3px;
+  background: linear-gradient(90deg, #FE7743, #e56a2e);
   border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(254, 119, 67, 0.3);
 }
 
-/* Admin Card */
+/* Admin Card - Premium Design */
 .admin-box {
-  background: #fff;
-  border-radius: 12px;
-  padding: 1.8rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border: 1px solid #eee;
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 24px rgba(39, 63, 79, 0.08);
+  border: 1px solid rgba(239, 238, 234, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #FE7743, #e56a2e, #FE7743);
+  border-radius: 20px 20px 0 0;
 }
 
 .admin-box:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(39, 63, 79, 0.12);
+  border-color: rgba(254, 119, 67, 0.3);
 }
 
-/* Header Section */
+/* Header Section - Premium */
 .admin-header {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  margin-bottom: 1.8rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(239, 238, 234, 0.8);
 }
 
+/* Profile Photo Wrapper - Enhanced */
 .profile-photo-wrapper {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #f5f5f5;
+  background: linear-gradient(135deg, rgba(239, 238, 234, 0.3) 0%, rgba(239, 238, 234, 0.1) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 
+    0 6px 16px rgba(39, 63, 79, 0.12),
+    0 0 0 3px rgba(254, 119, 67, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid rgba(254, 119, 67, 0.2);
+}
+
+.profile-photo-wrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 
+    0 12px 32px rgba(39, 63, 79, 0.2),
+    0 0 0 4px rgba(254, 119, 67, 0.2);
+  border-color: rgba(254, 119, 67, 0.4);
 }
 
 .profile-photo {
-  /* width: 100%;
-  height: 100%; */
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   transition: all 0.3s ease;
+}
+
+.profile-icon-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #273F4F 0%, #1a2c38 100%);
+  color: #EFEEEA;
+}
+
+.profile-icon-fallback .material-icons {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #EFEEEA;
 }
 
 .profile-photo.editable {
@@ -93,148 +148,348 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 107, 0, 0.7);
+  background: linear-gradient(135deg, rgba(254, 119, 67, 0.9) 0%, rgba(229, 106, 46, 0.9) 100%);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 50%;
+  font-family: 'Segoe UI', 'Inter', sans-serif;
 }
 
 .photo-upload-label:hover .photo-overlay {
   opacity: 1;
 }
 
+/* Admin Name - Premium Typography */
 .admin-name {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #273F4F;
   flex-grow: 1;
   margin: 0;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.2px;
+  line-height: 1.3;
 }
 
-/* Button Styles */
+/* Button Styles - Premium */
 .edit-btn, .save-btn {
-  background-color: #FF6B00;
+  background: linear-gradient(135deg, #FE7743 0%, #e56a2e 100%);
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.95rem;
-  display: flex;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.4rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(255, 107, 0, 0.3);
-  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(254, 119, 67, 0.3);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  font-family: 'Segoe UI', 'Inter', sans-serif;
 }
 
 .edit-btn:hover, .save-btn:hover {
-  background-color: #E05D00;
+  background: linear-gradient(135deg, #e56a2e 0%, #d45a1f 100%);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
+  box-shadow: 0 6px 16px rgba(254, 119, 67, 0.4);
 }
 
-.material-icons {
-  font-size: 1.2rem;
+.edit-btn:active, .save-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(254, 119, 67, 0.3);
 }
 
-/* Form Styles */
+.edit-btn .material-icons,
+.save-btn .material-icons {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Form Styles - Premium */
 .admin-form {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #eee;
+  border-top: 2px solid rgba(239, 238, 234, 0.8);
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
 }
 
 label {
   display: block;
-  font-weight: 500;
-  margin-bottom: 0.6rem;
-  color: #444;
-  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #273F4F;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-family: 'Segoe UI', 'Inter', sans-serif;
 }
 
 input[type="email"],
 input[type="password"],
 input[type="text"] {
-  width: 97%;
-  padding: 0.85rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  background-color: #fafafa;
-  color: #333;
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 2px solid rgba(239, 238, 234, 0.8);
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, rgba(239, 238, 234, 0.3) 0%, rgba(239, 238, 234, 0.1) 100%);
+  color: #273F4F;
+  font-family: 'Segoe UI', 'Inter', sans-serif;
+  box-sizing: border-box;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+input::placeholder {
+  color: #8a9aad;
+  font-weight: 400;
 }
 
 input:focus {
-  border-color: #FF6B00;
+  border-color: #FE7743;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
-  background-color: #fff;
+  box-shadow: 
+    0 0 0 4px rgba(254, 119, 67, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  background: white;
+  transform: translateY(-1px);
 }
 
 input:disabled {
-  background-color: #f5f5f5;
-  color: #777;
+  background: rgba(239, 238, 234, 0.5);
+  color: #5a6d7e;
   cursor: not-allowed;
+  border-color: rgba(239, 238, 234, 0.6);
+  opacity: 0.7;
 }
 
-/* Password Field */
+/* Password Field - Enhanced */
 .password-wrapper {
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
+}
+
+.password-wrapper input {
+  padding-right: 2.8rem;
 }
 
 .eye-icon {
   position: absolute;
-  right: 1rem;
-  background: none;
+  right: 0.8rem;
+  background: transparent;
   border: none;
-  color: #777;
+  color: #5a6d7e;
   cursor: pointer;
-  transition: color 0.3s ease;
-  padding: 0.5rem;
+  transition: all 0.3s ease;
+  padding: 0.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 6px;
+  z-index: 1;
 }
 
 .eye-icon:hover {
-  color: #FF6B00;
+  color: #FE7743;
+  background: rgba(254, 119, 67, 0.1);
+  transform: scale(1.1);
+}
+
+.eye-icon .material-icons {
+  font-size: 1.1rem;
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+  .profile-container {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .admin-box {
+    padding: 1.25rem;
+  }
+
   .admin-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.2rem;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
   }
 
   .profile-photo-wrapper {
-    width: 90px;
-    height: 90px;
+    width: 75px;
+    height: 75px;
+  }
+
+  .profile-icon-fallback .material-icons {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
   }
 
   .admin-name {
-    margin-top: 0.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .title::before {
+    width: 70px;
+    height: 2.5px;
+  }
+
+  .admin-box {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .profile-photo-wrapper {
+    width: 70px;
+    height: 70px;
+    align-self: center;
+  }
+
+  .profile-icon-fallback .material-icons {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .admin-name {
+    font-size: 1.15rem;
+    text-align: center;
+    width: 100%;
+    margin-top: 0.4rem;
   }
 
   .edit-btn, .save-btn {
-    align-self: stretch;
-    margin-top: 0.8rem;
+    width: 100%;
     justify-content: center;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+  }
+
+  .admin-form {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  label {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .admin-box {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .admin-header {
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .profile-photo-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .profile-icon-fallback .material-icons {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .admin-name {
+    font-size: 1.1rem;
+  }
+
+  .edit-btn, .save-btn {
+    padding: 0.55rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    font-size: 0.75rem;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.85rem;
   }
 }
