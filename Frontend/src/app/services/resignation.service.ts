@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { API_CONFIG } from '../config/api.config';
 
 @Injectable({ providedIn: 'root' })
 export class ResignationService {
-  private apiUrl = 'http://localhost:5000/api/resignation';
+  private apiUrl = `${API_CONFIG.baseUrl}/resignation`;
 
   constructor(private http: HttpClient) {}
 
