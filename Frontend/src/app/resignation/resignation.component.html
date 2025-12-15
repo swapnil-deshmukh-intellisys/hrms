@@ -1,32 +1,50 @@
-<div class="navbar">
-  <h2>Intellisys IT Solutions Private Limited</h2>
-</div>
-
-
-
-
 <div class="resignation-wrapper">
-  <h2>Resignation Form</h2>
+  <!-- Header -->
+  <div class="header-container">
+    <h2 class="page-title">
+      <mat-icon>exit_to_app</mat-icon>
+      Resignation Form
+    </h2>
+  </div>
 
-  <form class="resignation-form" [formGroup]="resignationForm" (ngSubmit)="submitResignation()">
-    <label>Employee Code</label>
-    <input formControlName="employeeCode" type="text" placeholder="Enter Employee Code">
+  <!-- Main Content Card -->
+  <div class="main-section">
+    <form class="resignation-form" [formGroup]="resignationForm" (ngSubmit)="submitResignation()">
+      <div class="form-group">
+        <label>Employee Code</label>
+        <input formControlName="employeeCode" type="text" placeholder="Enter Employee Code">
+      </div>
 
-    <label>Employee Name</label>
-    <input formControlName="employeeName" type="text" placeholder="Enter Name">
+      <div class="form-group">
+        <label>Employee Name</label>
+        <input formControlName="employeeName" type="text" placeholder="Enter Name">
+      </div>
 
-    <label>Department</label>
-    <input formControlName="department" type="text" placeholder="Enter Department">
+      <div class="form-group">
+        <label>Department</label>
+        <input formControlName="department" type="text" placeholder="Enter Department">
+      </div>
 
-    <label>Last Working Day</label>
-    <input formControlName="lastWorkingDate" type="date">
+      <div class="form-group">
+        <label>Last Working Day</label>
+        <input formControlName="lastWorkingDate" type="date">
+      </div>
 
-    <label>Reason for Exit</label>
-    <textarea formControlName="reason" placeholder="Enter reason" rows="4"></textarea>
+      <div class="form-group full-width">
+        <label>Reason for Exit</label>
+        <textarea formControlName="reason" placeholder="Enter reason" rows="4"></textarea>
+      </div>
 
-    <div class="button-group">
-      <button type="submit" class="submit-btn">Submit</button>
-      <button type="button" class="cancel-btn">Cancel</button>
-    </div>
-  </form>
+      <div class="button-group">
+        <button type="submit" class="submit-btn">
+          <mat-icon>send</mat-icon>
+          Submit
+        </button>
+        <button type="button" class="cancel-btn" (click)="cancelForm()">
+          <mat-icon>cancel</mat-icon>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

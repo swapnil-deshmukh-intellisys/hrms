@@ -2,19 +2,28 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { API_CONFIG } from '../config/api.config';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-resignation',
   standalone: true,
   templateUrl: './resignation.component.html',
   styleUrls: ['./resignation.component.css'],
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, MatIconModule]
 })
 export class ResignationComponent {
   resignationForm: FormGroup;
   showForm = false;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private alertService: AlertService
+  ) {
     this.resignationForm = this.fb.group({
       employeeCode: ['', Validators.required],
       employeeName: ['', Validators.required],
@@ -30,20 +39,24 @@ export class ResignationComponent {
 
   submitResignation() {
     if (this.resignationForm.valid) {
-      this.http.post('http://localhost:5000/api/resignation/submit', this.resignationForm.value)
+      this.http.post(`${API_CONFIG.baseUrl}/resignation/submit`, this.resignationForm.value)
         .subscribe({
           next: () => {
-            alert('Resignation submitted successfully.');
+            this.alertService.success('Resignation submitted successfully.');
             this.resignationForm.reset();
             this.showForm = false;
           },
           error: (error: any) => {
-            alert('Error submitting resignation.');
+            this.alertService.error('Error submitting resignation.');
             console.error(error);
           }
         });
     } else {
-      alert('Please fill out all fields correctly.');
+      this.alertService.warning('Please fill out all fields correctly.');
     }
+  }
+
+  cancelForm() {
+    this.resignationForm.reset();
   }
 }
