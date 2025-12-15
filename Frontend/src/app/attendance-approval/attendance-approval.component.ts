@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { API_CONFIG } from '../config/api.config';
+import { MatIconModule } from '@angular/material/icon';
 
 interface AttendanceRequest {
   _id: any;
@@ -46,7 +48,7 @@ interface Holiday {
 @Component({
   selector: 'app-attendance-approval',
   standalone: true,
-  imports: [CommonModule, DatePipe, FormsModule],
+  imports: [CommonModule, DatePipe, FormsModule, MatIconModule],
   templateUrl: './attendance-approval.component.html',
   styleUrls: ['./attendance-approval.component.css']
 })
@@ -73,7 +75,7 @@ export class AttendanceApprovalComponent implements OnInit {
   }
 
   fetchHolidays() {
-    this.http.get<Holiday[]>('http://localhost:5000/api/holidays/all').subscribe({
+    this.http.get<Holiday[]>(`${API_CONFIG.baseUrl}/holidays/all`).subscribe({
       next: (data) => {
         this.holidays = data.map(h => ({ ...h, date: new Date(h.date) }));
         this.generateCalendar();
@@ -83,7 +85,7 @@ export class AttendanceApprovalComponent implements OnInit {
   }
 
   fetchAttendanceRequests(): void {
-    this.http.get<AttendanceRequest[]>('http://localhost:5000/api/attendance-application/pending').subscribe({
+    this.http.get<AttendanceRequest[]>(`${API_CONFIG.baseUrl}/attendance-application/pending`).subscribe({
       next: (data) => {
         this.requests = data.map(r => ({ ...r, expanded: false }));
       },
@@ -99,7 +101,7 @@ export class AttendanceApprovalComponent implements OnInit {
 
   accept(index: number) {
     const request = this.requests[index];
-    this.http.put('http://localhost:5000/api/attendance-application/approve', {
+    this.http.put(`${API_CONFIG.baseUrl}/attendance-application/approve`, {
       id: request._id
     }).subscribe({
       next: () => {
@@ -112,7 +114,7 @@ export class AttendanceApprovalComponent implements OnInit {
 
   reject(index: number): void {
     const request = this.requests[index];
-    this.http.put('http://localhost:5000/api/attendance-application/reject', {
+    this.http.put(`${API_CONFIG.baseUrl}/attendance-application/reject`, {
       id: request._id
     }).subscribe({
       next: () => {
@@ -207,7 +209,7 @@ export class AttendanceApprovalComponent implements OnInit {
 
     if (existingHoliday && existingHoliday._id) {
       // Update existing holiday
-      this.http.put(`http://localhost:5000/api/holidays/${existingHoliday._id}`, holidayData)
+      this.http.put(`${API_CONFIG.baseUrl}/holidays/${existingHoliday._id}`, holidayData)
         .subscribe({
           next: () => {
             console.log('✅ Holiday Updated');
@@ -218,7 +220,7 @@ export class AttendanceApprovalComponent implements OnInit {
         });
     } else {
       // Add new holiday
-      this.http.post('http://localhost:5000/api/holidays/add', holidayData)
+      this.http.post(`${API_CONFIG.baseUrl}/holidays/add`, holidayData)
         .subscribe({
           next: () => {
             console.log('✅ Holiday Saved');
@@ -244,7 +246,7 @@ export class AttendanceApprovalComponent implements OnInit {
     );
     
     if (holiday && holiday._id) {
-      this.http.put(`http://localhost:5000/api/holidays/${holiday._id}/approve`, {})
+      this.http.put(`${API_CONFIG.baseUrl}/holidays/${holiday._id}/approve`, {})
         .subscribe({
           next: () => {
             console.log('✅ Holiday Approved');
@@ -273,7 +275,7 @@ export class AttendanceApprovalComponent implements OnInit {
     
     if (holiday && holiday._id) {
       if (confirm(`Are you sure you want to cancel the holiday "${holiday.name}"?`)) {
-        this.http.delete(`http://localhost:5000/api/holidays/${holiday._id}`)
+        this.http.delete(`${API_CONFIG.baseUrl}/holidays/${holiday._id}`)
           .subscribe({
             next: () => {
               console.log('Holiday Cancelled');
