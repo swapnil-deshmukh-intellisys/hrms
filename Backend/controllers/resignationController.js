@@ -1,10 +1,22 @@
 const Resignation = require('../models/Resignation');
+const Notification = require('../models/Notification');
 
 // Submit resignation
 exports.submitResignation = async (req, res) => {
   try {
     const resignation = new Resignation(req.body);
     await resignation.save();
+    
+    // Create notification for admin
+    await Notification.create({
+      recipient: 'all',
+      type: 'resignation',
+      title: 'New Resignation Request',
+      message: `${req.body.empName || req.body.employeeName || 'An employee'} has submitted a resignation request`,
+      actionRoute: '/resignation-approval',
+      createdAt: new Date()
+    });
+    
     res.status(200).json({ message: 'Resignation submitted', data: resignation });
   } catch (err) {
     res.status(500).json({ error: 'Server error', details: err.message });
