@@ -11,16 +11,16 @@
           alt="{{ emp.name || 'Employee' }}'s photo"
           class="employee-image"
         />
-        <h1>
-           
-          <span style="color: black;" *ngIf="!editingWelcome">Welcome, {{ getTitlePrefix() }} {{ username || 'Shraddha' }}</span>
-          <input *ngIf="editingWelcome" [(ngModel)]="username" class="edit-input">
-        </h1>
-      </div>
-    
-      <div class="welcome-message">
-        <span *ngIf="!editingWelcome">Hope you have a great day at work!</span>
-        
+        <div class="welcome-text-container">
+          <h1>
+             
+            <span style="color: black;" *ngIf="!editingWelcome">Welcome, {{ getTitlePrefix() }} {{ username || 'Shraddha' }}</span>
+            <input *ngIf="editingWelcome" [(ngModel)]="username" class="edit-input">
+          </h1>
+          <div class="welcome-message">
+            <span *ngIf="!editingWelcome">Hope you have a great day at work!</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="officelogo">
